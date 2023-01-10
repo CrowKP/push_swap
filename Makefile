@@ -44,7 +44,7 @@ all: $(NAME)
 $(NAME): $(OBJS) 
 	@make -C $(LIB_DIR)
 	@$(CC) $(CFLAGS) $(INCLUDE) -o $(NAME) $(FILES) -L lib/ -lft
-	@echo "\n$(GREEN) Created $(NAME) $(DEF_COLOR)\n"
+	@echo "\n$(GREEN) $(NAME) feels nice and ready $(DEF_COLOR)\n"
 
 clean:
 	@$(RM) $(OBJS) $(LIB_DIR_OBJ)
