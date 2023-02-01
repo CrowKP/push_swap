@@ -13,69 +13,6 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
-int	stacklen(int *s)
-{
-	int	it;
-
-	it = 0;
-	while (s[it])
-		it++;
-	return (it);
-}
-
-int	*dostack(int argc)
-{
-	int	*s;
-
-	s = NULL;
-	if (argc < 2)
-	{
-		ft_printf("Error\n");
-	}
-	s = malloc((argc - 1) * sizeof * s);
-	return (s);
-}
-
-void	savestack(int argc, char **argv, int *s)
-{
-	int	it;
-	int	jt;
-
-	it = 0;
-	jt = 1;
-	while (argc > jt)
-	{
-		s[it] = ft_atoi(argv[jt]);
-		it++;
-		jt++;
-	}
-}
-
-void	swapprint(int *a, int *b)
-{
-	if (a && b == NULL)
-	{
-		if (swapnumber(a) == 0)
-			ft_printf("Error in swapping a.\n");
-		else
-			ft_printf("sa\n");
-	}
-	if (b && a == NULL)
-	{
-		if (swapnumber(b) == 0)
-			ft_printf("Error in swapping b.\n");
-		else
-			ft_printf("sb\n");
-	}
-	if (b && a)
-	{
-		if (swapnumber(a) == 0 || swapnumber(b) == 0)
-			ft_printf("Error in swapping a, b or both.\n");
-		else
-			ft_printf("ss\n");
-	}
-}
-
 int	*swapnumber(int *a)
 {
 	int	temp;
@@ -86,6 +23,69 @@ int	*swapnumber(int *a)
 		a[0] = a[1];
 		a[1] = temp;
 		return (a);
+	}
+	return (0);
+}
+
+int	*revrot(int *s)
+{
+	int	it;
+	int	temp;
+
+	it = stacklen(s) - 1;
+	if (s[2])
+	{
+		temp = s[it];
+		while (s[it])
+		{
+			s[it] = s[it - 1];
+			it--;
+		}
+		s[0] = temp;
+		return (s);
+	}
+	return (0);
+}
+
+void	push(int *src, int *dst)
+{
+	int	it;
+
+	if (dst[0])
+	{
+		it = stacklen(dst) + 1;
+		while (it > 0)
+		{
+			dst[it] = dst[it - 1];
+			it--;
+		}
+	}
+	it = 0;
+	dst[0] = src[0];
+	while (src[it])
+	{
+		src[it] = src[it + 1];
+		it++;
+	}
+	src[it] = '\0';
+}
+
+int	*rotate(int *s)
+{
+	int	it;
+	int	temp;
+
+	it = 0;
+	if (s[2])
+	{
+		temp = s[0];
+		while (s[it])
+		{
+			s[it] = s[it + 1];
+			it++;
+		}
+		s[it - 1] = temp;
+		return (s);
 	}
 	return (0);
 }

@@ -36,26 +36,8 @@ void	rotateprint(int *a, int *b)
 		else
 			ft_printf("rr\n");
 	}
-}
-
-int	*rotate(int *s)
-{
-	int	it;
-	int	temp;
-
-	it = 0;
-	if (s[2])
-	{
-		temp = s[0];
-		while (s[it])
-		{
-			s[it] = s[it + 1];
-			it++;
-		}
-		s[it - 1] = temp;
-		return (s);
-	}
-	return (0);
+	if (rotate(a) == 0 || rotate(b) == 0)
+		freestacks(a, b);
 }
 
 void	revrotprint(int *a, int *b)
@@ -81,53 +63,53 @@ void	revrotprint(int *a, int *b)
 		else
 			ft_printf("rrr\n");
 	}
+	if (revrot(a) == 0 || revrot(b) == 0)
+		freestacks(a, b);
 }
 
-int	*revrot(int *s)
+void	swapprint(int *a, int *b)
 {
-	int	it;
-	int	temp;
-
-	it = stacklen(s) - 1;
-	if (s[2])
+	if (a && b == NULL)
 	{
-		temp = s[it];
-		while (s[it])
-		{
-			s[it] = s[it - 1];
-			it--;
-		}
-		s[0] = temp;
-		return (s);
+		if (swapnumber(a) == 0)
+			ft_printf("Error in swapping a.\n");
+		else
+			ft_printf("sa\n");
 	}
-	return (0);
+	if (b && a == NULL)
+	{
+		if (swapnumber(b) == 0)
+			ft_printf("Error in swapping b.\n");
+		else
+			ft_printf("sb\n");
+	}
+	if (b && a)
+	{
+		if (swapnumber(a) == 0 || swapnumber(b) == 0)
+			ft_printf("Error in swapping a, b or both.\n");
+		else
+			ft_printf("ss\n");
+	}
+	if (swapnumber(a) == 0 || swapnumber(b) == 0)
+		freestacks(a, b);
 }
 
-void	push(int *src, int *dst)
+void	pushprint(int *src, int *dst, int check)
 {
-	int	it;
-
-	it = 0;
 	if (src[0])
 	{
-		if (dst[0])
-		{
-			it = stacklen(dst) + 1;
-			while (it > 0)
-			{
-				dst[it] = dst[it - 1];
-				it--;
-			}
-		}
-		it = 0;
-		dst[0] = src[0];
-		while (src[it])
-		{
-			src[it] = src[it + 1];
-			it++;
-		}
-		src[it] = '\0';
+		push(src, dst);
+		if (check == 0)
+			ft_printf("pa\n");
+		if (check == 1)
+			ft_printf("pb\n");
 	}
-	else
-		ft_printf("Pushing error.\n");
+	if (!src[0])
+	{
+		if (check == 0)
+			ft_printf("Error pushing a to b.\n");
+		if (check == 1)
+			ft_printf("Error pushing b to a.\n");
+		freestacks(src, dst);
+	}
 }

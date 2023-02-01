@@ -27,5 +27,8 @@ int		stacklen(int *s);
 void	revrotprint(int *a, int *b);
 int		*revrot(int *s);
 void	savestack(int argc, char *argv[], int *s);
+void	pushprint(int *src, int *dst, int check);
+void	argcheck(int *s);
+void	freestacks(int *a, int *b);
 
 #endif
