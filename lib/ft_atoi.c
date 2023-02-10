@@ -9,25 +9,30 @@
 /*   Updated: 2022/02/02 14:55:07 by aigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_atoi(const char *str)
-{
-	int				result;
-	int				sign;
+#include "ft_printf.h"
+#include "push_swap.h"
 
-	sign = 0;
+int	ft_atoi(const char *str, int *s)
+{
+	long long int				result;
+	int							sign;
+
+	sign = 1;
 	result = 0;
 	while (*str == 32 || *str == '\t' || *str == '\f'
 		|| *str == '\r' || *str == '\n' || *str == '\v')
 		str++;
 	if (*str == '-' || *str == '+')
 		if (*str++ == '-')
-			sign = 1;
+			sign = -1;
 	while (*str >= '0' && *str <= '9')
 	{
 		result = (10 * result) + (*str - '0');
 		str++;
+		if (result > ((long long int)INT_MAX + 1) && sign == -1)
+			freestacksatoi(s, sign);
+		if (result > INT_MAX && sign == 1)
+			freestacksatoi(s, sign);
 	}
-	if (sign)
-		return (-result);
-	return (result);
+	return (result * sign);
 }

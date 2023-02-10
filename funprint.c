@@ -18,26 +18,24 @@ void	rotateprint(int *a, int *b)
 	if (a && b == NULL)
 	{
 		if (rotate(a) == 0)
-			ft_printf("Error in rotating a.\n");
+			roterror(a, b);
 		else
 			ft_printf("ra\n");
 	}
 	if (b && a == NULL)
 	{
 		if (rotate(b) == 0)
-			ft_printf("Error in rotating b.\n");
+			roterror(a, b);
 		else
 			ft_printf("rb\n");
 	}
 	if (b && a)
 	{
 		if (rotate(a) == 0 || rotate(b) == 0)
-			ft_printf("Error in rotating a, b or both.\n");
+			roterror(a, b);
 		else
 			ft_printf("rr\n");
 	}
-	if (rotate(a) == 0 || rotate(b) == 0)
-		freestacks(a, b);
 }
 
 void	revrotprint(int *a, int *b)
@@ -45,26 +43,24 @@ void	revrotprint(int *a, int *b)
 	if (a && b == NULL)
 	{
 		if (revrot(a) == 0)
-			ft_printf("Error in reverse rotating a.\n");
+			roterror(a, b);
 		else
 			ft_printf("rra\n");
 	}
 	if (b && a == NULL)
 	{
 		if (revrot(b) == 0)
-			ft_printf("Error in reverse rotating b.\n");
+			roterror(a, b);
 		else
 			ft_printf("rrb\n");
 	}
 	if (b && a)
 	{
 		if (revrot(a) == 0 || revrot(b) == 0)
-			ft_printf("Error in reverse rotating a, b or both.\n");
+			roterror(a, b);
 		else
 			ft_printf("rrr\n");
 	}
-	if (revrot(a) == 0 || revrot(b) == 0)
-		freestacks(a, b);
 }
 
 void	swapprint(int *a, int *b)
@@ -72,26 +68,24 @@ void	swapprint(int *a, int *b)
 	if (a && b == NULL)
 	{
 		if (swapnumber(a) == 0)
-			ft_printf("Error in swapping a.\n");
+			swaperror(a, b);
 		else
 			ft_printf("sa\n");
 	}
 	if (b && a == NULL)
 	{
 		if (swapnumber(b) == 0)
-			ft_printf("Error in swapping b.\n");
+			swaperror(a, b);
 		else
 			ft_printf("sb\n");
 	}
 	if (b && a)
 	{
 		if (swapnumber(a) == 0 || swapnumber(b) == 0)
-			ft_printf("Error in swapping a, b or both.\n");
+			swaperror(a, b);
 		else
 			ft_printf("ss\n");
 	}
-	if (swapnumber(a) == 0 || swapnumber(b) == 0)
-		freestacks(a, b);
 }
 
 void	pushprint(int *src, int *dst, int check)

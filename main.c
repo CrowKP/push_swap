@@ -17,11 +17,18 @@ int	main(int argc, char *argv[])
 {
 	int	*a;
 	int	*b;
+	int it = 0;
 
 	a = dostack(argc);
-	savestack(argc, argv, a);
+	a = savestack(argc, argv, a);
+	argcheck(a);
 	b = dostack(argc);
-	pushprint(b, a, 1);
+	checklen(a, b);
+	while (a[it])
+	{
+		ft_printf("%d\n", a[it]);
+		it++;
+	}
 	return (0);
 }
 
@@ -54,7 +61,7 @@ int	*dostack(int argc)
 	return (s);
 }
 
-void	savestack(int argc, char **argv, int *s)
+int	*savestack(int argc, char **argv, int *s)
 {
 	int	it;
 	int	jt;
@@ -63,11 +70,12 @@ void	savestack(int argc, char **argv, int *s)
 	jt = 1;
 	while (argc > jt)
 	{
-		s[it] = ft_atoi(argv[jt]);
+		checknums(argv[jt], s);
+		s[it] = ft_atoi(argv[jt], s);
 		it++;
 		jt++;
 	}
-	argcheck(s);
+	return (s);
 }
 
 void	argcheck(int *s)
@@ -91,5 +99,4 @@ void	argcheck(int *s)
 		jt = (it + 2);
 		it++;
 	}
-	
 }

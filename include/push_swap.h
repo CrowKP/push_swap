@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdint.h>
+# include <limits.h>
 
 int		*dostack(int argc);
 int		main(int argc, char *argv[]);
@@ -26,9 +27,16 @@ void	rotateprint(int *a, int *b);
 int		stacklen(int *s);
 void	revrotprint(int *a, int *b);
 int		*revrot(int *s);
-void	savestack(int argc, char *argv[], int *s);
+int		*savestack(int argc, char *argv[], int *s);
 void	pushprint(int *src, int *dst, int check);
 void	argcheck(int *s);
 void	freestacks(int *a, int *b);
+void	freestacksatoi(int *s, int sign);
+void	checknums(char *argv, int *s);
+void	checklen(int *a, int *b);
+void	index3(int *a);
+void	index5(int *a, int *b);
+void	swaperror(int *a, int *b);
+void	roterror(int *a, int *b);
 
 #endif

@@ -40,7 +40,7 @@ char			*ft_strrchr(const char *str, int c);
 int				ft_strncmp(const char *str1, const char *str2, unsigned int n);
 void			*ft_memchr(const void *src, int c, unsigned int n);
 int				ft_memcmp(const void *str1, const void *str2, unsigned int n);
-int				ft_atoi(const char *str);
+int				ft_atoi(const char *str, int *s);
 void			ft_bzero(void *str, unsigned int n);
 char			*ft_strnstr(const char *hay, const char *nee, size_t n);
 void			*ft_calloc(size_t count, size_t size);
