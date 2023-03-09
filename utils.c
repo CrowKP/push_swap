@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aigarcia <aigarcia@student.42barc...>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/09 13:06:57 by aigarcia          #+#    #+#             */
+/*   Updated: 2023/03/09 13:06:58 by aigarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 #include "push_swap.h"
 #include "ft_printf.h"
@@ -50,4 +61,20 @@ void	checklen(int *a, int *b)
 		index3(a);
 	if (len == 5)
 		index5(a, b);
+}
+
+int	checksmall(int *a)
+{
+	int	it;
+	int	n;
+
+	it = 0;
+	n = 0;
+	while (a[it])
+	{
+		if (a[it] < a[n])
+			n = it;
+		it++;
+	}
+	return (n);
 }

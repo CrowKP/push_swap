@@ -17,16 +17,24 @@ int	main(int argc, char *argv[])
 {
 	int	*a;
 	int	*b;
-	int it = 0;
+	int	it = 0;
 
 	a = dostack(argc);
 	a = savestack(argc, argv, a);
 	argcheck(a);
 	b = dostack(argc);
 	checklen(a, b);
+	ft_printf("Stack a:\n");
 	while (a[it])
 	{
 		ft_printf("%d\n", a[it]);
+		it++;
+	}
+	it = 0;
+	ft_printf("Stack b:\n");
+	while (b[it])
+	{
+		ft_printf("%d\n", b[it]);
 		it++;
 	}
 	return (0);

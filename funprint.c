@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
-void	rotateprint(int *a, int *b)
+void	rtp(int *a, int *b)
 {
 	if (a && b == NULL)
 	{
@@ -38,7 +38,7 @@ void	rotateprint(int *a, int *b)
 	}
 }
 
-void	revrotprint(int *a, int *b)
+void	rrtp(int *a, int *b)
 {
 	if (a && b == NULL)
 	{
@@ -63,7 +63,7 @@ void	revrotprint(int *a, int *b)
 	}
 }
 
-void	swapprint(int *a, int *b)
+void	sp(int *a, int *b)
 {
 	if (a && b == NULL)
 	{
@@ -88,8 +88,16 @@ void	swapprint(int *a, int *b)
 	}
 }
 
-void	pushprint(int *src, int *dst, int check)
+void	pp(int *src, int *dst, int check)
 {
+	if (!src[0])
+	{
+		if (check == 0)
+			ft_printf("Error pushing b to a.\n");
+		if (check == 1)
+			ft_printf("Error pushing a to b.\n");
+		freestacks(src, dst);
+	}
 	if (src[0])
 	{
 		push(src, dst);
@@ -97,13 +105,5 @@ void	pushprint(int *src, int *dst, int check)
 			ft_printf("pa\n");
 		if (check == 1)
 			ft_printf("pb\n");
-	}
-	if (!src[0])
-	{
-		if (check == 0)
-			ft_printf("Error pushing a to b.\n");
-		if (check == 1)
-			ft_printf("Error pushing b to a.\n");
-		freestacks(src, dst);
 	}
 }

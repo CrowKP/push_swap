@@ -19,16 +19,16 @@
 
 int		*dostack(int argc);
 int		main(int argc, char *argv[]);
-void	swapprint(int *a, int *b);
+void	sp(int *a, int *b);
 int		*swapnumber(int *a);
 void	push(int *src, int *dst);
 int		*rotate(int *s);
-void	rotateprint(int *a, int *b);
+void	rtp(int *a, int *b);
 int		stacklen(int *s);
-void	revrotprint(int *a, int *b);
+void	rrtp(int *a, int *b);
 int		*revrot(int *s);
 int		*savestack(int argc, char *argv[], int *s);
-void	pushprint(int *src, int *dst, int check);
+void	pp(int *src, int *dst, int check);
 void	argcheck(int *s);
 void	freestacks(int *a, int *b);
 void	freestacksatoi(int *s, int sign);
@@ -38,5 +38,11 @@ void	index3(int *a);
 void	index5(int *a, int *b);
 void	swaperror(int *a, int *b);
 void	roterror(int *a, int *b);
+int		checksmall(int *a);
+void	movenum(int *a, int *b, int ns, int nb);
+void	movenum2(int *a, int *b, int ns, int nb);
+void	movenum3(int *a, int *b, int ns, int nb);
+void	movenum4(int *a, int *b, int ns, int nb);
+int		checkbig(int *a);
 
 #endif

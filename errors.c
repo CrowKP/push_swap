@@ -7,7 +7,7 @@ void	swaperror(int *a, int *b)
 	if (a && b == NULL)
 	{
 		ft_printf("Error in swapping a.\n");
-		freestacks(a ,b);
+		freestacks(a, b);
 	}
 	if (b && a == NULL)
 	{
@@ -26,7 +26,7 @@ void	roterror(int *a, int *b)
 	if (a && b == NULL)
 	{
 		ft_printf("Error in rotating a.\n");
-		freestacks(a ,b);
+		freestacks(a, b);
 	}
 	if (b && a == NULL)
 	{

@@ -6,24 +6,34 @@ void	index3(int *a)
 {
 	if (a[0] < a[1] && a[0] < a[2] && a[1] > a[2])
 	{
-		swapprint(a, 0);
-		rotateprint(a, 0);
+		sp(a, 0);
+		rtp(a, 0);
 	}
 	if (a[0] > a[1] && a[0] < a[2])
-		swapprint(a, 0);
+		sp(a, 0);
 	if (a[0] > a[1] && a[1] > a[2])
 	{
-		swapprint(a, 0);
-		revrotprint(a, 0);
+		sp(a, 0);
+		rrtp(a, 0);
 	}
 	if (a[0] > a[1] && a[1] < a[2])
-		rotateprint(a, 0);
+		rtp(a, 0);
 	if (a[0] < a[1] && a[0] > a[2])
-		revrotprint(a ,0);
+		rrtp(a, 0);
 }
 
 void	index5(int *a, int *b)
 {
-	if (a && b)
-		ft_printf("I'm here.\n");
+	int	ns;
+	int	nb;
+
+	ns = checksmall(a);
+	nb = checkbig(a);
+	movenum(a, b, ns, nb);
+	index3(a);
+	if (b[0] < b[1])
+		rtp(0, b);
+	pp(b, a, 0);
+	rtp(a, 0);
+	pp(b, a, 0);
 }

@@ -76,7 +76,7 @@ int	*rotate(int *s)
 	int	temp;
 
 	it = 0;
-	if (s[2])
+	if (s[1])
 	{
 		temp = s[0];
 		while (s[it])
