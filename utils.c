@@ -33,46 +33,49 @@ void	freestacksatoi(int *s, int sign)
 	exit(0);
 }
 
-void	checknums(char *argv, int *s)
+void	checklen(int *a, int *b, int argc)
 {
-	int	it;
+	int	alen;
+	int	blen;
 
-	it = 0;
-	while (argv[it])
-	{
-		if ((argv[it] == '-' || argv[it] == '+'))
-			if (ft_isdigit(argv[it + 1]) == 1)
-				it++;
-		if (ft_isdigit(argv[it]) == 0)
-		{
-			ft_printf("Some elements are not numbers.\n");
-			freestacks(s, 0);
-		}
-		it++;
-	}
+	blen = 0;
+	alen = argc - 1;
+	if (alen == 3)
+		index3(a, &alen);
+	//if (len == 4)
+		//index4(a, b);
+	if (alen == 5)
+		index5(a, b, &alen, &blen);
+	if (alen == 100)
+		index100(a, b, &alen, &blen);
 }
 
-void	checklen(int *a, int *b)
-{
-	int	len;
-
-	len = stacklen(a);
-	if (len == 3)
-		index3(a);
-	if (len == 5)
-		index5(a, b);
-}
-
-int	checksmall(int *a)
+int	checksmall(int *a, int *len)
 {
 	int	it;
 	int	n;
 
 	it = 0;
 	n = 0;
-	while (a[it])
+	while (it < *len)
 	{
 		if (a[it] < a[n])
+			n = it;
+		it++;
+	}
+	return (n);
+}
+
+int	checkbig(int *a, int *len)
+{
+	int	it;
+	int	n;
+
+	it = 0;
+	n = 0;
+	while (it < *len)
+	{
+		if (a[it] > a[n])
 			n = it;
 		it++;
 	}

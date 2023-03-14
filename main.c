@@ -20,12 +20,12 @@ int	main(int argc, char *argv[])
 	int	it = 0;
 
 	a = dostack(argc);
-	a = savestack(argc, argv, a);
-	argcheck(a);
+	savestack(argc, argv, a);
+	argcheck(a, argc);
 	b = dostack(argc);
-	checklen(a, b);
+	checklen(a, b, argc);
 	ft_printf("Stack a:\n");
-	while (a[it])
+	while (it < argc - 1)
 	{
 		ft_printf("%d\n", a[it]);
 		it++;
@@ -40,14 +40,23 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-int	stacklen(int *s)
+void	checknums(char *argv, int *s)
 {
 	int	it;
 
 	it = 0;
-	while (s[it])
+	while (argv[it])
+	{
+		if ((argv[it] == '-' || argv[it] == '+'))
+			if (ft_isdigit(argv[it + 1]) == 1)
+				it++;
+		if (ft_isdigit(argv[it]) == 0)
+		{
+			ft_printf("Some elements are not numbers.\n");
+			freestacks(s, 0);
+		}
 		it++;
-	return (it);
+	}
 }
 
 int	*dostack(int argc)
@@ -60,7 +69,8 @@ int	*dostack(int argc)
 		ft_printf("There are no input numbers.\n");
 		exit(0);
 	}
-	s = malloc((argc - 1) * sizeof * s);
+	s = (int*)malloc(sizeof(int) * argc);
+	ft_bzero(s, argc);
 	if (!s)
 	{
 		ft_printf("Failed to allocate memory.\n");
@@ -69,33 +79,32 @@ int	*dostack(int argc)
 	return (s);
 }
 
-int	*savestack(int argc, char **argv, int *s)
+void	savestack(int argc, char **argv, int *s)
 {
 	int	it;
 	int	jt;
 
 	it = 0;
 	jt = 1;
-	while (argc > jt)
+	while (jt < argc)
 	{
 		checknums(argv[jt], s);
 		s[it] = ft_atoi(argv[jt], s);
 		it++;
 		jt++;
 	}
-	return (s);
 }
 
-void	argcheck(int *s)
+void	argcheck(int *s, int argc)
 {
 	int	it;
 	int	jt;
 
 	it = 0;
 	jt = 1;
-	while (s[it])
+	while (it < argc - 1)
 	{
-		while (s[jt])
+		while (jt < argc - 1)
 		{
 			if (s[it] == s[jt])
 			{

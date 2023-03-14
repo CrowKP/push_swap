@@ -13,84 +13,84 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
-void	rtp(int *a, int *b)
+void	rtp(int *a, int *b, int *alen, int *blen)
 {
 	if (a && b == NULL)
 	{
-		if (rotate(a) == 0)
+		if (rotate(a, alen) == 0)
 			roterror(a, b);
 		else
 			ft_printf("ra\n");
 	}
 	if (b && a == NULL)
 	{
-		if (rotate(b) == 0)
+		if (rotate(b, blen) == 0)
 			roterror(a, b);
 		else
 			ft_printf("rb\n");
 	}
 	if (b && a)
 	{
-		if (rotate(a) == 0 || rotate(b) == 0)
+		if (rotate(a, alen) == 0 || rotate(b, blen) == 0)
 			roterror(a, b);
 		else
 			ft_printf("rr\n");
 	}
 }
 
-void	rrtp(int *a, int *b)
+void	rrtp(int *a, int *b, int *alen, int *blen)
 {
 	if (a && b == NULL)
 	{
-		if (revrot(a) == 0)
+		if (revrot(a, alen) == 0)
 			roterror(a, b);
 		else
 			ft_printf("rra\n");
 	}
 	if (b && a == NULL)
 	{
-		if (revrot(b) == 0)
+		if (revrot(b, blen) == 0)
 			roterror(a, b);
 		else
 			ft_printf("rrb\n");
 	}
 	if (b && a)
 	{
-		if (revrot(a) == 0 || revrot(b) == 0)
+		if (revrot(a, alen) == 0 || revrot(b, blen) == 0)
 			roterror(a, b);
 		else
 			ft_printf("rrr\n");
 	}
 }
 
-void	sp(int *a, int *b)
+void	sp(int *a, int *b, int *alen, int *blen)
 {
 	if (a && b == NULL)
 	{
-		if (swapnumber(a) == 0)
+		if (swapnumber(a, alen) == 0)
 			swaperror(a, b);
 		else
 			ft_printf("sa\n");
 	}
 	if (b && a == NULL)
 	{
-		if (swapnumber(b) == 0)
+		if (swapnumber(b, blen) == 0)
 			swaperror(a, b);
 		else
 			ft_printf("sb\n");
 	}
 	if (b && a)
 	{
-		if (swapnumber(a) == 0 || swapnumber(b) == 0)
+		if (swapnumber(a, alen) == 0 || swapnumber(b, blen) == 0)
 			swaperror(a, b);
 		else
 			ft_printf("ss\n");
 	}
 }
 
-void	pp(int *src, int *dst, int check)
+void	pp(int *src, int *dst, int check, int *slen, int *dlen)
 {
-	if (!src[0])
+	if (slen == 0)
 	{
 		if (check == 0)
 			ft_printf("Error pushing b to a.\n");
@@ -98,9 +98,9 @@ void	pp(int *src, int *dst, int check)
 			ft_printf("Error pushing a to b.\n");
 		freestacks(src, dst);
 	}
-	if (src[0])
+	else
 	{
-		push(src, dst);
+		push(src, dst, slen, dlen);
 		if (check == 0)
 			ft_printf("pa\n");
 		if (check == 1)

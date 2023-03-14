@@ -13,11 +13,11 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
-int	*swapnumber(int *a)
+int	*swapnumber(int *a, int *len)
 {
 	int	temp;
 
-	if (a[0] && a[1])
+	if (*len > 1)
 	{
 		temp = a[0];
 		a[0] = a[1];
@@ -27,16 +27,16 @@ int	*swapnumber(int *a)
 	return (0);
 }
 
-int	*revrot(int *s)
+int	*revrot(int *s, int *len)
 {
 	int	it;
 	int	temp;
 
-	it = stacklen(s) - 1;
-	if (s[2])
+	it = *len - 1;
+	if (*len >= 2)
 	{
 		temp = s[it];
-		while (s[it])
+		while (it >= 0)
 		{
 			s[it] = s[it - 1];
 			it--;
@@ -47,39 +47,41 @@ int	*revrot(int *s)
 	return (0);
 }
 
-void	push(int *src, int *dst)
+void	push(int *src, int *dst, int *slen, int *dlen)
 {
 	int	it;
 
-	if (dst[0])
+	if (*dlen > 0)
 	{
-		it = stacklen(dst) + 1;
+		it = *dlen + 1;
 		while (it > 0)
 		{
 			dst[it] = dst[it - 1];
 			it--;
 		}
 	}
+	*dlen = *dlen + 1;
 	it = 0;
 	dst[0] = src[0];
-	while (src[it])
+	while (it <= *slen)
 	{
 		src[it] = src[it + 1];
 		it++;
 	}
+	*slen = *slen - 1;
 	src[it] = '\0';
 }
 
-int	*rotate(int *s)
+int	*rotate(int *s, int *len)
 {
 	int	it;
 	int	temp;
 
 	it = 0;
-	if (s[1])
+	if (*len >= 2)
 	{
 		temp = s[0];
-		while (s[it])
+		while (it < *len)
 		{
 			s[it] = s[it + 1];
 			it++;
