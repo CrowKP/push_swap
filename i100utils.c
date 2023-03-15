@@ -56,7 +56,9 @@ void	easystack(int *a, int *t, int *len)
 	while (jt < *len)
 	{
 		if (a[jt] != t[it])
+		{
 			it++;
+		}
 		else
 		{
 			a[jt] = it;

@@ -29,37 +29,29 @@ void	index3(int *a, int *alen)
 
 void	index4(int *a, int *b, int *alen, int *blen)
 {
-	int	ns;
-
-	ns = checksmall(a, alen);
-	movesmall(a, b, ns, alen, blen);
+	movesmall(a, b, alen, blen);
 	index3(a, alen);
-	pp(b, a, 0, blen, alen);
+	pa(b, a, blen, alen);
 }
 
 void	index5(int *a, int *b, int *alen, int *blen)
 {
-	int	ns;
-	int	nb;
-
-	ns = checksmall(a, alen);
-	nb = checkbig(a, alen);
-	movenum(a, b, ns, nb, alen, blen);
+	movenum(a, b, alen, blen);
 	index3(a, alen);
 	if (b[0] < b[1])
 		rtp(0, b, 0, blen);
-	pp(b, a, 0, blen, alen);
+	pa(b, a, blen, alen);
 	rtp(a, 0, alen, 0);
-	pp(b, a, 0, blen, alen);
+	pa(b, a, blen, alen);
 }
 
 void	index100(int *a, int *b, int *alen, int *blen)
 {
 	int	*tst;
-	
+
 	tst = dostack(*alen);
 	cpystack(tst, a, alen);
 	sortstack(tst, alen);
 	easystack(a, tst, alen);
-	rtp(a, b, alen, blen);
+	pb(a, b, alen, blen);
 }

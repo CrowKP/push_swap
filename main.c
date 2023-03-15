@@ -22,6 +22,7 @@ int	main(int argc, char *argv[])
 	a = dostack(argc);
 	savestack(argc, argv, a);
 	argcheck(a, argc);
+	ordercheck(a, argc);
 	b = dostack(argc);
 	checklen(a, b, argc);
 	ft_printf("Stack a:\n");
@@ -32,11 +33,12 @@ int	main(int argc, char *argv[])
 	}
 	it = 0;
 	ft_printf("Stack b:\n");
-	while (b[it])
+	while (it < argc - 1)
 	{
 		ft_printf("%d\n", b[it]);
 		it++;
 	}
+	freestacks(a, b);
 	return (0);
 }
 
@@ -50,7 +52,7 @@ int	*dostack(int argc)
 		ft_printf("There are no input numbers.\n");
 		exit(0);
 	}
-	s = (int*)malloc(sizeof(int) * argc);
+	s = (int *)malloc(sizeof(int) * argc);
 	ft_bzero(s, argc);
 	if (!s)
 	{
@@ -74,4 +76,29 @@ void	savestack(int argc, char **argv, int *s)
 		it++;
 		jt++;
 	}
+}
+
+void	ordercheck(int *s, int argc)
+{
+	int *t;
+	int	it;
+	int	len;
+
+	it = 0;
+	len = argc - 1;
+	t = dostack(len);
+	cpystack(t, s, &len);
+	sortstack(t, &len);
+	while (it < len)
+	{
+		if (s[it] != t[it])
+			break;
+		it++;
+	}
+	if (s[it] == t[it])
+	{
+		ft_printf("The stack is already in order.\n");
+		freestacks(s, t);
+	}
+	free(t);
 }

@@ -88,22 +88,30 @@ void	sp(int *a, int *b, int *alen, int *blen)
 	}
 }
 
-void	pp(int *src, int *dst, int check, int *slen, int *dlen)
+void	pa(int *src, int *dst, int *slen, int *dlen)
 {
 	if (slen == 0)
 	{
-		if (check == 0)
-			ft_printf("Error pushing b to a.\n");
-		if (check == 1)
-			ft_printf("Error pushing a to b.\n");
+		ft_printf("Error pushing b to a.\n");
 		freestacks(src, dst);
 	}
 	else
 	{
 		push(src, dst, slen, dlen);
-		if (check == 0)
-			ft_printf("pa\n");
-		if (check == 1)
-			ft_printf("pb\n");
+		ft_printf("pa\n");
+	}
+}
+
+void	pb(int *src, int *dst, int *slen, int *dlen)
+{
+	if (slen == 0)
+	{
+		ft_printf("Error pushing a to b.\n");
+		freestacks(src, dst);
+	}
+	else
+	{
+		push(src, dst, slen, dlen);
+		ft_printf("pb\n");
 	}
 }
