@@ -48,7 +48,7 @@ void	cpystack(int *t, int *a, int *len);
 void	sortstack(int *t, int *len);
 void	swap(int *n1, int *n2);
 void	easystack(int *a, int *t, int *len);
-int		*addlen(int *len);
-int		*sublen(int *len);
+void	movesmall(int *a, int *b, int ns, int *alen, int *blen);
+void	index4(int *a, int *b, int *alen, int *blen);
 
 #endif

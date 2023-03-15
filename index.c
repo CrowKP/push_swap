@@ -4,22 +4,37 @@
 
 void	index3(int *a, int *alen)
 {
-	if (a[0] < a[1] && a[0] < a[2] && a[1] > a[2])
+	if (*alen == 2)
+	{
+		if (a[0] > a[1])
+			sp(a, 0, alen, 0);
+	}
+	else if (a[0] < a[1] && a[0] < a[2] && a[1] > a[2])
 	{
 		sp(a, 0, alen, 0);
 		rtp(a, 0, alen, 0);
 	}
-	if (a[0] > a[1] && a[0] < a[2])
+	else if (a[0] > a[1] && a[0] < a[2])
 		sp(a, 0, alen, 0);
-	if (a[0] > a[1] && a[1] > a[2])
+	else if (a[0] > a[1] && a[1] > a[2])
 	{
 		sp(a, 0, alen, 0);
 		rrtp(a, 0, alen, 0);
 	}
-	if (a[0] > a[1] && a[1] < a[2])
+	else if (a[0] > a[1] && a[1] < a[2])
 		rtp(a, 0, alen, 0);
-	if (a[0] < a[1] && a[0] > a[2])
+	else if (a[0] < a[1] && a[0] > a[2])
 		rrtp(a, 0, alen, 0);
+}
+
+void	index4(int *a, int *b, int *alen, int *blen)
+{
+	int	ns;
+
+	ns = checksmall(a, alen);
+	movesmall(a, b, ns, alen, blen);
+	index3(a, alen);
+	pp(b, a, 0, blen, alen);
 }
 
 void	index5(int *a, int *b, int *alen, int *blen)

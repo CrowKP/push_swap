@@ -33,51 +33,11 @@ void	freestacksatoi(int *s, int sign)
 	exit(0);
 }
 
-void	checklen(int *a, int *b, int argc)
+void	swap(int *n1, int *n2)
 {
-	int	alen;
-	int	blen;
+	int	temp;
 
-	blen = 0;
-	alen = argc - 1;
-	if (alen == 3)
-		index3(a, &alen);
-	//if (len == 4)
-		//index4(a, b);
-	if (alen == 5)
-		index5(a, b, &alen, &blen);
-	if (alen == 100)
-		index100(a, b, &alen, &blen);
-}
-
-int	checksmall(int *a, int *len)
-{
-	int	it;
-	int	n;
-
-	it = 0;
-	n = 0;
-	while (it < *len)
-	{
-		if (a[it] < a[n])
-			n = it;
-		it++;
-	}
-	return (n);
-}
-
-int	checkbig(int *a, int *len)
-{
-	int	it;
-	int	n;
-
-	it = 0;
-	n = 0;
-	while (it < *len)
-	{
-		if (a[it] > a[n])
-			n = it;
-		it++;
-	}
-	return (n);
+	temp = *n1;
+	*n1 = *n2;
+	*n2 = temp;
 }

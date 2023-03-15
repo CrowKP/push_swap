@@ -40,25 +40,6 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-void	checknums(char *argv, int *s)
-{
-	int	it;
-
-	it = 0;
-	while (argv[it])
-	{
-		if ((argv[it] == '-' || argv[it] == '+'))
-			if (ft_isdigit(argv[it + 1]) == 1)
-				it++;
-		if (ft_isdigit(argv[it]) == 0)
-		{
-			ft_printf("Some elements are not numbers.\n");
-			freestacks(s, 0);
-		}
-		it++;
-	}
-}
-
 int	*dostack(int argc)
 {
 	int	*s;
@@ -92,28 +73,5 @@ void	savestack(int argc, char **argv, int *s)
 		s[it] = ft_atoi(argv[jt], s);
 		it++;
 		jt++;
-	}
-}
-
-void	argcheck(int *s, int argc)
-{
-	int	it;
-	int	jt;
-
-	it = 0;
-	jt = 1;
-	while (it < argc - 1)
-	{
-		while (jt < argc - 1)
-		{
-			if (s[it] == s[jt])
-			{
-				ft_printf("Some number(s) appear twice or more.\n");
-				freestacks(s, 0);
-			}
-			jt++;
-		}
-		jt = (it + 2);
-		it++;
 	}
 }

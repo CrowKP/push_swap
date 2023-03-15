@@ -20,13 +20,13 @@ void	movenum(int *a, int *b, int ns, int nb, int *alen, int *blen)
 		pp(a, b, 1, alen, blen);
 		pp(a, b, 1, alen, blen);
 	}
-	if ((ns == 0 && nb == 2) || (nb == 0 && ns == 2))
+	else if ((ns == 0 && nb == 2) || (nb == 0 && ns == 2))
 	{
 		pp(a, b, 1, alen, blen);
 		sp(a, 0, alen, 0);
 		pp(a, b, 1, alen, blen);
 	}
-	if ((ns == 0 && nb == 3) || (nb == 0 && ns == 3))
+	else if ((ns == 0 && nb == 3) || (nb == 0 && ns == 3))
 	{
 		pp(a, b, 1, alen, blen);
 		rrtp(a, 0, alen, 0);
@@ -45,13 +45,13 @@ void	movenum2(int *a, int *b, int ns, int nb, int *alen, int *blen)
 		pp(a, b, 1, alen, blen);
 		pp(a, b, 1, alen, blen);
 	}
-	if ((ns == 1 && nb == 2) || (nb == 1 && ns == 2))
+	else if ((ns == 1 && nb == 2) || (nb == 1 && ns == 2))
 	{
 		rtp(a, 0, alen, 0);
 		pp(a, b, 1, alen, blen);
 		pp(a, b, 1, alen, blen);
 	}
-	if ((ns == 1 && nb == 3) || (nb == 1 && ns == 3))
+	else if ((ns == 1 && nb == 3) || (nb == 1 && ns == 3))
 	{
 		rtp(a, 0, alen, 0);
 		pp(a, b, 1, alen, blen);
@@ -71,14 +71,14 @@ void	movenum3(int *a, int *b, int ns, int nb, int *alen, int *blen)
 		pp(a, b, 1, alen, blen);
 		pp(a, b, 1, alen, blen);
 	}
-	if ((ns == 2 && nb == 3) || (nb == 2 && ns == 3))
+	else if ((ns == 2 && nb == 3) || (nb == 2 && ns == 3))
 	{
 		rtp(a, 0, alen, 0);
 		rtp(a, 0, alen, 0);
 		pp(a, b, 1, alen, blen);
 		pp(a, b, 1, alen, blen);
 	}
-	if ((ns == 2 && nb == 4) || (nb == 2 && ns == 4))
+	else if ((ns == 2 && nb == 4) || (nb == 2 && ns == 4))
 	{
 		rrtp(a, 0, alen, 0);
 		pp(a, b, 1, alen, blen);
@@ -99,10 +99,4 @@ void	movenum4(int *a, int *b, int ns, int nb, int *alen, int *blen)
 		pp(a, b, 1, alen, blen);
 		pp(a, b, 1, alen, blen);
 	}
-}
-
-int	*sublen(int *len)
-{
-	len = len - 1;
-	return (len);
 }

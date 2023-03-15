@@ -46,15 +46,6 @@ void	sortstack(int *t, int *len)
 	}
 }
 
-void	swap(int *n1, int *n2)
-{
-	int	temp;
-
-	temp = *n1;
-	*n1 = *n2;
-	*n2 = temp;
-}
-
 void	easystack(int *a, int *t, int *len)
 {
 	int	it;
