@@ -31,14 +31,6 @@ int	main(int argc, char *argv[])
 		ft_printf("%d\n", a[it]);
 		it++;
 	}
-	it = 0;
-	ft_printf("Stack b:\n");
-	while (it < argc - 1)
-	{
-		ft_printf("%d\n", b[it]);
-		it++;
-	}
-	freestacks(a, b);
 	return (0);
 }
 
@@ -49,7 +41,7 @@ int	*dostack(int argc)
 	s = NULL;
 	if (argc < 2)
 	{
-		ft_printf("There are no input numbers.\n");
+		ft_printf("There are not enough numbers.\n");
 		exit(0);
 	}
 	s = (int *)malloc(sizeof(int) * argc);
@@ -80,7 +72,7 @@ void	savestack(int argc, char **argv, int *s)
 
 void	ordercheck(int *s, int argc)
 {
-	int *t;
+	int	*t;
 	int	it;
 	int	len;
 
@@ -92,7 +84,7 @@ void	ordercheck(int *s, int argc)
 	while (it < len)
 	{
 		if (s[it] != t[it])
-			break;
+			break ;
 		it++;
 	}
 	if (s[it] == t[it])

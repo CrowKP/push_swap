@@ -52,5 +52,15 @@ void	easystack(int *a, int *t, int *len);
 void	movesmall(int *a, int *b, int *alen, int *blen);
 void	index4(int *a, int *b, int *alen, int *blen);
 void	ordercheck(int *s, int argc);
+void	ordersmall(int *a, int *b, int *alen, int *blen);
+void	orderit(int *a, int *b, int *alen, int *blen);
+int		checktop(int *a, int *alen);
+int		checkbot(int *a, int *alen);
+void	rotstack(int *a, int *alen, int top, int bottom);
+void	pushstack(int *a, int *b, int *alen, int *blen);
+void	pushexb(int *a, int *b, int *alen, int *blen);
+int		checkposition(int *a, int *b, int *blen);
+void	pushrandom(int *a, int *b, int *alen, int *blen);
+void	rotb(int *b, int *blen);
 
 #endif

@@ -53,5 +53,8 @@ void	index100(int *a, int *b, int *alen, int *blen)
 	cpystack(tst, a, alen);
 	sortstack(tst, alen);
 	easystack(a, tst, alen);
-	pb(a, b, alen, blen);
+	if (*alen > 20)
+		orderit(a, b, alen, blen);
+	else
+		ordersmall(a, b, alen, blen);
 }
