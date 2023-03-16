@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   orderutils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aigarcia <aigarcia@student.42barc...>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 20:15:39 by aigarcia          #+#    #+#             */
+/*   Updated: 2023/03/16 20:15:40 by aigarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 #include "push_swap.h"
 #include "ft_printf.h"
 
-int	checktop(int *a, int *alen)
+int	checktop(int *a, int *alen, int jt)
 {
 	int	it;
 	int	top;
@@ -10,14 +21,14 @@ int	checktop(int *a, int *alen)
 	it = 0;
 	while (it <= *alen / 2)
 	{
-		if (a[it] >= 0 || a[it] <= 19)
+		if (a[it] >= jt && a[it] <= jt + 19)
 			top = it;
 		it++;
 	}
 	return (top);
 }
 
-int	checkbot(int *a, int *alen)
+int	checkbot(int *a, int *alen, int jt)
 {
 	int	it;
 	int	bot;
@@ -25,7 +36,7 @@ int	checkbot(int *a, int *alen)
 	it = *alen;
 	while (it > *alen / 2)
 	{
-		if (a[it] >= 0 || a[it] <= 19)
+		if (a[it] >= jt && a[it] <= jt + 19)
 			bot = it;
 		it--;
 	}

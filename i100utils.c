@@ -100,31 +100,26 @@ void	orderit(int *a, int *b, int *alen, int *blen)
 	int	it;
 	int	top;
 	int	bottom;
+	int	jt;
 
 	it = 0;
-	while (*alen > 1)
+	jt = *alen;
+	while (*alen > 0)
 	{
-		while (it < *blen)
-		{
-			ft_printf("%d\n", b[it]);
-			it++;
-		}
-		it = 0;
-		if (a[0] >= 0 && a[0] <= 19)
+		if (a[0] >= it && a[0] <= it + 19)
 			pushstack(a, b, alen, blen);
 		else
 		{
-			top = checktop(a, alen);
-			bottom = checkbot(a, alen);
+			top = checktop(a, alen, it);
+			bottom = checkbot(a, alen, it);
 			rotstack(a, alen, top, bottom);
+		}
+		if (jt == *alen + 20)
+		{
+			it += 20;
+			jt = *alen;
 		}
 	}
 	rotb(b, blen);
-	bottom = *blen;
-	it = 0;
-	while (it < bottom)
-	{
-		pa(b, a, blen, alen);
-		it++;
-	}
+	finalpush(a, b, alen, blen);
 }

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   orderutils2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aigarcia <aigarcia@student.42barc...>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 20:15:51 by aigarcia          #+#    #+#             */
+/*   Updated: 2023/03/16 20:15:52 by aigarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 #include "push_swap.h"
 #include "ft_printf.h"
@@ -52,5 +63,19 @@ void	rotb(int *b, int *blen)
 	{
 		while (b[0] != n)
 			rrtp(0, b, 0, blen);
+	}
+}
+
+void	finalpush(int *a, int *b, int *alen, int *blen)
+{
+	int	it;
+	int	slen;
+
+	it = 0;
+	slen = *blen;
+	while (it < slen)
+	{
+		pa(b, a, blen, alen);
+		it++;
 	}
 }

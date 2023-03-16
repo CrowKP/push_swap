@@ -17,7 +17,6 @@ int	main(int argc, char *argv[])
 {
 	int	*a;
 	int	*b;
-	int	it = 0;
 
 	a = dostack(argc);
 	savestack(argc, argv, a);
@@ -25,12 +24,7 @@ int	main(int argc, char *argv[])
 	ordercheck(a, argc);
 	b = dostack(argc);
 	checklen(a, b, argc);
-	ft_printf("Stack a:\n");
-	while (it < argc - 1)
-	{
-		ft_printf("%d\n", a[it]);
-		it++;
-	}
+	freestacks(a, b);
 	return (0);
 }
 

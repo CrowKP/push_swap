@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   index.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aigarcia <aigarcia@student.42barc...>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 20:15:13 by aigarcia          #+#    #+#             */
+/*   Updated: 2023/03/16 20:15:14 by aigarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 #include "push_swap.h"
 #include "ft_printf.h"
@@ -57,4 +68,15 @@ void	index100(int *a, int *b, int *alen, int *blen)
 		orderit(a, b, alen, blen);
 	else
 		ordersmall(a, b, alen, blen);
+}
+
+void	index500(int *a, int *b, int *alen, int *blen)
+{
+	int	*tst;
+
+	tst = dostack(*alen);
+	cpystack(tst, a, alen);
+	sortstack(tst, alen);
+	easystack(a, tst, alen);
+	order500(a, b, alen, blen);
 }

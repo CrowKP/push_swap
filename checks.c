@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checks.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aigarcia <aigarcia@student.42barc...>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 20:13:43 by aigarcia          #+#    #+#             */
+/*   Updated: 2023/03/16 20:13:45 by aigarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 #include "push_swap.h"
 #include "ft_printf.h"
@@ -91,4 +102,6 @@ void	checklen(int *a, int *b, int argc)
 		index5(a, b, &alen, &blen);
 	if (alen < 101 && alen > 5)
 		index100(a, b, &alen, &blen);
+	if (alen <= 500 && alen > 100)
+		index500(a, b, &alen, &blen);
 }
