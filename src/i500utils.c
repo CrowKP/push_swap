@@ -73,7 +73,7 @@ int	checkbot500(int *a, int *alen, int jt)
 		if (a[it] >= jt && a[it] <= jt + 44)
 		{
 			bot = it;
-			return(bot);
+			return (bot);
 		}
 		it--;
 	}

@@ -25,7 +25,7 @@ int	checktop(int *a, int *alen, int jt)
 		if (a[it] >= jt && a[it] <= jt + 19)
 		{
 			top = it;
-			return(top);
+			return (top);
 		}
 		it++;
 	}
