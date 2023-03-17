@@ -24,22 +24,22 @@ void	order500(int *a, int *b, int *alen, int *blen)
 	jt = *alen;
 	while (*alen > 5)
 	{
-		if (a[0] >= it && a[0] <= it + 45)
-			pushstack(a, b, alen, blen);
-		else
-		{
-			top = checktop500(a, alen, it);
-			bottom = checkbot500(a, alen, it);
-			rotstack(a, alen, top, bottom);
-		}
 		if (jt == *alen + 45)
 		{
 			it += 45;
 			jt = *alen;
 		}
+		else if (a[0] >= it && a[0] <= it + 44)
+			pb(a, b, alen, blen);
+		else if (a[0] > it + 44)
+		{
+			top = checktop500(a, alen, it);
+			bottom = checkbot500(a, alen, it);
+			while (a[0] > it + 44)
+				rotstack(a, alen, top, bottom);
+		}
 	}
-	rotb500(a, b, alen, blen);
-	finalpush(a, b, alen, blen);
+	finalpush500(a, b, alen, blen);
 }
 
 int	checktop500(int *a, int *alen, int jt)
@@ -48,13 +48,17 @@ int	checktop500(int *a, int *alen, int jt)
 	int	top;
 
 	it = 0;
+	top = 0;
 	while (it <= *alen / 2)
 	{
-		if (a[it] >= jt && a[it] <= jt + 45)
+		if (a[it] >= jt && a[it] <= jt + 44)
+		{
 			top = it;
+			return (top);
+		}
 		it++;
 	}
-	return (top);
+	return (*alen / 2);
 }
 
 int	checkbot500(int *a, int *alen, int jt)
@@ -62,23 +66,25 @@ int	checkbot500(int *a, int *alen, int jt)
 	int	it;
 	int	bot;
 
-	it = *alen;
+	it = *alen - 1;
+	bot = 0;
 	while (it > *alen / 2)
 	{
-		if (a[it] >= jt && a[it] <= jt + 45)
+		if (a[it] >= jt && a[it] <= jt + 44)
+		{
 			bot = it;
+			return(bot);
+		}
 		it--;
 	}
 	return (bot);
 }
 
-void	rotb500(int *a, int *b, int *alen, int *blen)
+void	rotb500(int *b, int *blen)
 {
 	int	it;
 	int	n;
 
-	while (*alen > 0)
-		pushstack(a, b, alen, blen);
 	it = checkbig(b, blen);
 	n = b[checkbig(b, blen)];
 	if (it <= *blen / 2)
@@ -90,5 +96,22 @@ void	rotb500(int *a, int *b, int *alen, int *blen)
 	{
 		while (b[0] != n)
 			rrtp(0, b, 0, blen);
+	}
+}
+
+void	finalpush500(int *a, int *b, int *alen, int *blen)
+{
+	int	it;
+	int	slen;
+
+	it = 0;
+	slen = *blen;
+	while (*alen > 0)
+		pb(a, b, alen, blen);
+	while (it < slen)
+	{
+		rotb500(b, blen);
+		pa(b, a, blen, alen);
+		it++;
 	}
 }

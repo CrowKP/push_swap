@@ -68,6 +68,7 @@ void	index100(int *a, int *b, int *alen, int *blen)
 		orderit(a, b, alen, blen);
 	else
 		ordersmall(a, b, alen, blen);
+	free(tst);
 }
 
 void	index500(int *a, int *b, int *alen, int *blen)

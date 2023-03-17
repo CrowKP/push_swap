@@ -24,7 +24,9 @@ INCLUDE = -I include
 RM = rm -f
 AR = ar -rcs
 CFLAGS = -Wall -Werror -Wextra -MMD
-FILES = main.c funprint.c funmove.c utils.c index.c errors.c i5utils.c i100utils.c ft_atoi.c checks.c i4utils.c orderutils.c orderutils2.c i500utils.c
+FILES = ./src/main.c ./src/funprint.c ./src/funmove.c ./src/utils.c ./src/index.c \
+	./src/errors.c ./src/i5utils.c ./src/i100utils.c ./src/ft_atoi.c ./src/checks.c \
+	./src/i4utils.c ./src/orderutils.c ./src/orderutils2.c ./src/i500utils.c
 OBJS = $(FILES:.c=.o)
 LIB_DIR = lib/
 RM_DEPS = *.d

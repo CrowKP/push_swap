@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   i100utils.c                                        :+:      :+:    :+:   */
+/*   i500utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigarcia <aigarcia@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 15:07:01 by aigarcia          #+#    #+#             */
-/*   Updated: 2023/03/14 15:07:02 by aigarcia         ###   ########.fr       */
+/*   Created: 2023/03/16 20:14:34 by aigarcia          #+#    #+#             */
+/*   Updated: 2023/03/17 14:44:09 by aigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,20 +106,20 @@ void	orderit(int *a, int *b, int *alen, int *blen)
 	jt = *alen;
 	while (*alen > 0)
 	{
-		if (a[0] >= it && a[0] <= it + 19)
-			pushstack(a, b, alen, blen);
-		else
-		{
-			top = checktop(a, alen, it);
-			bottom = checkbot(a, alen, it);
-			rotstack(a, alen, top, bottom);
-		}
 		if (jt == *alen + 20)
 		{
 			it += 20;
 			jt = *alen;
 		}
+		else if (a[0] >= it && a[0] <= it + 19)
+			pb(a, b, alen, blen);
+		else if (a[0] > it + 19)
+		{
+			top = checktop(a, alen, it);
+			bottom = checkbot(a, alen, it);
+			while (a[0] > it + 19)
+				rotstack(a, alen, top, bottom);
+		}
 	}
-	rotb(b, blen);
 	finalpush(a, b, alen, blen);
 }

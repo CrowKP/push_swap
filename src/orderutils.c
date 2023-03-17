@@ -19,13 +19,17 @@ int	checktop(int *a, int *alen, int jt)
 	int	top;
 
 	it = 0;
+	top = 0;
 	while (it <= *alen / 2)
 	{
 		if (a[it] >= jt && a[it] <= jt + 19)
+		{
 			top = it;
+			return(top);
+		}
 		it++;
 	}
-	return (top);
+	return (*alen / 2);
 }
 
 int	checkbot(int *a, int *alen, int jt)
@@ -33,11 +37,15 @@ int	checkbot(int *a, int *alen, int jt)
 	int	it;
 	int	bot;
 
-	it = *alen;
+	it = *alen - 1;
+	bot = 0;
 	while (it > *alen / 2)
 	{
 		if (a[it] >= jt && a[it] <= jt + 19)
+		{
 			bot = it;
+			return (bot);
+		}
 		it--;
 	}
 	return (bot);
@@ -45,63 +53,18 @@ int	checkbot(int *a, int *alen, int jt)
 
 void	rotstack(int *a, int *alen, int top, int bottom)
 {
-	if (*alen - top > bottom - *alen)
+	int	hold;
+
+	if (top <= *alen - bottom)
 	{
-		while (top > 0)
-		{
+		hold = a[top];
+		while (a[0] != hold)
 			rtp(a, 0, alen, 0);
-			top--;
-		}
 	}
-	if (*alen - top < bottom - *alen)
+	else if (top > *alen - bottom)
 	{
-		while (bottom < *alen)
-		{
+		hold = a[bottom];
+		while (a[0] != hold)
 			rrtp(a, 0, alen, 0);
-			bottom++;
-		}
 	}
-}
-
-void	pushstack(int *a, int *b, int *alen, int *blen)
-{
-	if (*blen == 0 || (*blen == 1 && a[0] > b[0]))
-		pb(a, b, alen, blen);
-	else if (*blen == 1 && a[0] < b[0])
-	{
-		pb(a, b, alen, blen);
-		sp(0, b, 0, blen);
-	}
-	else if (a[0] > b[0] && a[0] < b[*blen - 1])
-		pb(a, b, alen, blen);
-	else if (a[0] > b[checkbig(b, blen)])
-	{
-		pushexb(a, b, alen, blen);
-	}
-	else if (a[0] < b[checksmall(b, blen)])
-	{
-		pushexb(a, b, alen, blen);
-		rtp(0, b, 0, blen);
-	}
-	else
-	{
-		pushrandom(a, b, alen, blen);
-	}
-}
-
-void	pushexb(int *a, int *b, int *alen, int *blen)
-{
-	int	it;
-	int	n;
-
-	n = b[checkbig(b, blen)];
-	it = checkbig(b, blen);
-	while (b[0] != n)
-	{
-		if (it <= *blen / 2)
-			rtp(0, b, 0, blen);
-		else
-			rrtp(0, b, 0, blen);
-	}
-	pb(a, b, alen, blen);
 }

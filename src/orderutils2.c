@@ -75,6 +75,7 @@ void	finalpush(int *a, int *b, int *alen, int *blen)
 	slen = *blen;
 	while (it < slen)
 	{
+		rotb(b, blen);
 		pa(b, a, blen, alen);
 		it++;
 	}
