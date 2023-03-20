@@ -80,3 +80,21 @@ void	finalpush(int *a, int *b, int *alen, int *blen)
 		it++;
 	}
 }
+
+void	rota(int *a, int *alen, int top, int bot)
+{
+	int	hold;
+
+	if (top <= *alen - bot)
+	{
+		hold = a[top];
+		while (a[0] != hold)
+			rtp(a, 0, alen, 0);
+	}
+	else if (top > *alen - bot)
+	{
+		hold = a[bot];
+		while (a[0] != hold)
+			rrtp(a, 0, alen, 0);
+	}
+}

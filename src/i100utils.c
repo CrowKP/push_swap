@@ -98,8 +98,6 @@ void	ordersmall(int *a, int *b, int *alen, int *blen)
 void	orderit(int *a, int *b, int *alen, int *blen)
 {
 	int	it;
-	int	top;
-	int	bottom;
 	int	jt;
 
 	it = 0;
@@ -115,10 +113,8 @@ void	orderit(int *a, int *b, int *alen, int *blen)
 			pb(a, b, alen, blen);
 		else if (a[0] > it + 19)
 		{
-			top = checktop(a, alen, it);
-			bottom = checkbot(a, alen, it);
 			while (a[0] > it + 19)
-				rotstack(a, alen, top, bottom);
+				rotstack(a, b, alen, blen);
 		}
 	}
 	finalpush(a, b, alen, blen);

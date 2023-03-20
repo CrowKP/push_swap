@@ -16,8 +16,6 @@
 void	order500(int *a, int *b, int *alen, int *blen)
 {
 	int	it;
-	int	top;
-	int	bottom;
 	int	jt;
 
 	it = 0;
@@ -30,13 +28,11 @@ void	order500(int *a, int *b, int *alen, int *blen)
 			jt = *alen;
 		}
 		else if (a[0] >= it && a[0] <= it + 44)
-			pb(a, b, alen, blen);
+			pushstack(a, b, alen, blen);
 		else if (a[0] > it + 44)
 		{
-			top = checktop500(a, alen, it);
-			bottom = checkbot500(a, alen, it);
 			while (a[0] > it + 44)
-				rotstack(a, alen, top, bottom);
+				rotstack(a, alen, alen, blen);
 		}
 	}
 	finalpush500(a, b, alen, blen);

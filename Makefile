@@ -26,7 +26,8 @@ AR = ar -rcs
 CFLAGS = -Wall -Werror -Wextra -MMD
 FILES = ./src/main.c ./src/funprint.c ./src/funmove.c ./src/utils.c ./src/index.c \
 	./src/errors.c ./src/i5utils.c ./src/i100utils.c ./src/ft_atoi.c ./src/checks.c \
-	./src/i4utils.c ./src/orderutils.c ./src/orderutils2.c ./src/i500utils.c
+	./src/i4utils.c ./src/orderutils.c ./src/orderutils2.c ./src/i500utils.c \
+	./src/orderutils3.c
 OBJS = $(FILES:.c=.o)
 LIB_DIR = lib/
 RM_DEPS = *.d
