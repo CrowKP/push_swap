@@ -21,7 +21,7 @@ int	checktop(int *a, int *alen, int jt)
 
 	it = 0;
 	top = 0;
-	if	(*alen > 100 || jt > 100)
+	if (*alen > 100 || jt > 100)
 		mod = 44;
 	else
 		mod = 19;
@@ -45,7 +45,7 @@ int	checkbot(int *a, int *alen, int jt)
 
 	it = *alen - 1;
 	bot = 0;
-	if	(*alen > 100 || jt > 100)
+	if (*alen > 100 || jt > 100)
 		mod = 44;
 	else
 		mod = 19;
@@ -77,8 +77,8 @@ void	rotstack(int *a, int *b, int *alen, int *blen)
 		rotbtran(a, b, alen, blen);
 		if (a[0] != hold)
 			rota(a, alen, top, bot);
-		if (*blen == 1)
-			pb(a, b, alen, blen);
+		/*if (*blen == 1)
+			pb(a, b, alen, blen);*/
 	}
 	if (top > *alen - bot)
 	{
@@ -86,8 +86,8 @@ void	rotstack(int *a, int *b, int *alen, int *blen)
 		rotbbran(a, b, alen, blen);
 		if (a[0] != hold)
 			rota(a, alen, top, bot);
-		if (*blen == 1)
-			pb(a, b, alen, blen);
+		/*if (*blen == 1)
+			pb(a, b, alen, blen);*/
 	}
 }
 

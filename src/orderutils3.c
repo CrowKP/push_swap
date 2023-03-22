@@ -36,25 +36,27 @@ void	rotbtran(int *a, int *b, int *alen, int *blen)
 {
 	int	top;
 	int	it;
-	int	n;
+	//int	n;
 
 	it = calclen(alen, blen);
 	top = a[checktop(a, alen, it)];
-	n = b[checkposition2(b, blen, top)];
+	//n = b[checkposition2(b, blen, top)];
 	while (a[0] != top)
 	{
 		if (*alen > 100 || *blen > 100)
 		{
 			if (b[0] >= it && b[0] <= it + 44)
 				rtp(a, 0, alen, 0);
+			else
+				rtp(a, b, alen, blen);
 		}
 		else if (*alen < 100 || *blen < 100)
 		{
 			if (b[0] >= it && b[0] <= it + 19)
 				rtp(a, 0, alen, 0);
+			else
+				rtp(a, b, alen, blen);
 		}
-		else
-			rtp(a, b, alen, blen);
 	}
 }
 
@@ -62,11 +64,11 @@ void	rotbbran(int *a, int *b, int *alen, int *blen)
 {
 	int	bot;
 	int	it;
-	int	n;
+	//int	n;
 
 	it = calclen(alen, blen);
 	bot = a[checkbot(a, alen, it)];
-	n = b[checkposition2(b, blen, bot)];
+	//n = b[checkposition2(b, blen, bot)];
 	//This loop does not break, chek it.
 	while (a[0] != bot)
 	{
@@ -74,14 +76,16 @@ void	rotbbran(int *a, int *b, int *alen, int *blen)
 		{
 			if (b[0] >= it && b[0] <= it + 44)
 				rrtp(a, 0, alen, 0);
+			else
+				rrtp(a, b, alen, blen);
 		}
 		else if (*alen < 100 || *blen < 100)
 		{
 			if (b[0] >= it && b[0] <= it + 19)
 				rrtp(a, 0, alen, 0);
+			else
+				rrtp(a, b, alen, blen);
 		}
-		else
-			rrtp(a, b, alen, blen);
 	}
 }
 
