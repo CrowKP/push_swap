@@ -110,7 +110,7 @@ void	orderit(int *a, int *b, int *alen, int *blen)
 			jt = *alen;
 		}
 		else if (a[0] >= it && a[0] <= it + 19)
-			pb(a, b, alen, blen);
+			pushstack(a, b, alen, blen);
 		else if (a[0] > it + 19)
 		{
 			while (a[0] > it + 19)
