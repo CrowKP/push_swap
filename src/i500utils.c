@@ -32,7 +32,7 @@ void	order500(int *a, int *b, int *alen, int *blen)
 		else if (a[0] > it + 44)
 		{
 			while (a[0] > it + 44)
-				rotstack(a, alen, alen, blen);
+				rotstack(a, b, alen, blen);
 		}
 	}
 	finalpush500(a, b, alen, blen);
