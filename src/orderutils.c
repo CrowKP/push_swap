@@ -62,48 +62,33 @@ int	checkbot(int *a, int *alen, int jt)
 	return (bot);
 }
 
-void	rotstack(int *a, int *b, int *alen, int *blen)
+int	rotstack(int *a, int *alen, int check, int hold)
 {
-	int	top;
-	int	bot;
-	int	it;
-	int	hold;
+	int	small;
 
-	it = calclen(alen, blen);
-	top = checktop(a, alen, it);
-	bot = checkbot(a, alen, it);
-	if (top <= *alen - bot)
+	small = a[checksmall(a, alen)];
+	if (a[0] == small)
 	{
-		hold = a[top];
-		rotbtran(a, b, alen, blen);
-		if (a[0] != hold)
-			rota(a, alen, top, bot);
-		/*if (*blen == 1)
-			pb(a, b, alen, blen);*/
+		rtp(a, 0, alen, 0);
+		check = 1;
 	}
-	if (top > *alen - bot)
-	{
-		hold = a[bot];
-		rotbbran(a, b, alen, blen);
-		if (a[0] != hold)
-			rota(a, alen, top, bot);
-		/*if (*blen == 1)
-			pb(a, b, alen, blen);*/
-	}
+	while (check == 0 && a[0] > a[*alen - 1] && a[0] < (a[checkbig(a, alen)]) - 4)
+		rtp(a, 0, alen, 0);
+	while (check == 1 && a[0] < hold && a[0] > a[*alen - 1] && a[0] < a[*alen - 1] + 4)
+		rtp(a, 0, alen, 0);
+	return (check);
 }
 
 void	pushstack(int *a, int *b, int *alen, int *blen)
 {
-	if (*blen == 0 || (*blen == 1 && a[0] > b[0]))
-		pb(a, b, alen, blen);
-	else if (*blen == 1 && a[0] < b[0])
+	if (b[0] < a[0] && b[0] > a[*alen - 1])
+		pa(b, a, blen, alen);
+	else if (a[checkposition2(b, a, alen, blen)] == a[0])
 	{
-		pb(a, b, alen, blen);
-		sp(0, b, 0, blen);
+		rrtp(0, b, 0, blen);
+		pa(b, a, blen, alen);
 	}
-	else if (a[0] > b[0] && a[0] < b[*blen - 1])
-		pb(a, b, alen, blen);
-	else if (a[0] > b[checkbig(b, blen)] || a[0] < b[checksmall(b, blen)])
+	else if (b[0] > a[checkbig(a, alen)] || b[0] < a[checksmall(a, alen)])
 		pushexb(a, b, alen, blen);
 	else
 		pushrandom(a, b, alen, blen);
@@ -114,14 +99,14 @@ void	pushexb(int *a, int *b, int *alen, int *blen)
 	int	it;
 	int	n;
 
-	n = b[checkbig(b, blen)];
-	it = checkbig(b, blen);
-	while (b[0] != n)
+	n = a[checksmall(a, alen)];
+	it = checksmall(a, alen);
+	while (a[0] != n)
 	{
-		if (it <= *blen / 2)
-			rtp(0, b, 0, blen);
+		if (it <= *alen / 2)
+			rtp(a, 0, alen, 0);
 		else
-			rrtp(0, b, 0, blen);
+			rrtp(a, 0, alen, 0);
 	}
-	pb(a, b, alen, blen);
+	pa(b, a, blen, alen);
 }

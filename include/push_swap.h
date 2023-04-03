@@ -56,23 +56,19 @@ void	ordersmall(int *a, int *b, int *alen, int *blen);
 void	orderit(int *a, int *b, int *alen, int *blen);
 int		checktop(int *a, int *alen, int jt);
 int		checkbot(int *a, int *alen, int jt);
-void	rotstack(int *a, int *b, int *alen, int *blen);
+int		rotstack(int *a, int *alen, int check, int hold);
 int		checkposition(int *a, int *b, int *blen);
 void	pushrandom(int *a, int *b, int *alen, int *blen);
 void	rotb(int *b, int *blen);
 void	finalpush(int *a, int *b, int *alen, int *blen);
 void	index500(int *a, int *b, int *alen, int *blen);
 void	order500(int *a, int *b, int *alen, int *blen);
-int		checktop500(int *a, int *alen, int jt);
-int		checkbot500(int *a, int *alen, int jt);
 void	rotb500(int *b, int *blen);
 void	finalpush500(int *a, int *b, int *alen, int *blen);
 void	pushexb(int *a, int *b, int *alen, int *blen);
 void	pushstack(int *a, int *b, int *alen, int *blen);
 void	rota(int *a, int *alen, int top, int bot);
 int		calclen(int *alen, int *blen);
-void	rotbtran(int *a, int *b, int *alen, int *blen);
-void	rotbbran(int *a, int *b, int *alen, int *blen);
-int		checkposition2(int *b, int *blen, int pos);
+int		checkposition2(int *b, int *a, int *alen, int *blen);
 
 #endif

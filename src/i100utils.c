@@ -97,25 +97,18 @@ void	ordersmall(int *a, int *b, int *alen, int *blen)
 
 void	orderit(int *a, int *b, int *alen, int *blen)
 {
-	int	it;
-	int	jt;
+	int	check;
+	int	hold;
 
-	it = 0;
-	jt = *alen;
-	while (*alen > 0)
+	if (a[0] < a[*alen - 1] && *blen == 0)
+		rtp(a, 0, alen, 0);
+	hold = a[*alen - 1];
+	check = 0;
+	while (a[0] != hold)
 	{
-		if (jt == *alen + 20)
-		{
-			it += 20;
-			jt = *alen;
-		}
-		else if (a[0] >= it && a[0] <= it + 19)
-			pushstack(a, b, alen, blen);
-		else if (a[0] > it + 19)
-		{
-			while (a[0] > it + 19)
-				rotstack(a, b, alen, blen);
-		}
+		check = rotstack(a, alen, check, hold);
+		pb(a, b, alen, blen);
 	}
-	finalpush(a, b, alen, blen);
+	while (*blen > 0)
+		pushstack(a, b, alen, blen);
 }

@@ -20,11 +20,11 @@ int	checkposition(int *a, int *b, int *blen)
 	it = 1;
 	while (it < *blen)
 	{
-		if (a[0] > b[it] && a[0] < b[it - 1])
+		if (a[0] < b[it] && a[0] > b[it - 1])
 			return (it);
 		it++;
 	}
-	return (0);
+	exit (0);
 }
 
 void	pushrandom(int *a, int *b, int *alen, int *blen)
@@ -32,19 +32,19 @@ void	pushrandom(int *a, int *b, int *alen, int *blen)
 	int	it;
 	int	n;
 
-	n = b[checkposition(a, b, blen)];
-	it = checkposition(a, b, blen);
-	if (it <= *blen / 2)
+	n = a[checkposition(b, a, alen)];
+	it = checkposition(b, a, alen);
+	if (it <= *alen / 2)
 	{
-		while (b[0] != n)
-			rtp(0, b, 0, blen);
+		while (a[0] != n)
+			rtp(a, 0, alen, 0);
 	}
 	else
 	{
-		while (b[0] != n)
-			rrtp(0, b, 0, blen);
+		while (a[0] != n)
+			rrtp(a, 0, alen, 0);
 	}
-	pb(a, b, alen, blen);
+	pa(b, a, blen, alen);
 }
 
 void	rotb(int *b, int *blen)

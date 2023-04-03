@@ -32,48 +32,10 @@ void	order500(int *a, int *b, int *alen, int *blen)
 		else if (a[0] > it + 44)
 		{
 			while (a[0] > it + 44)
-				rotstack(a, b, alen, blen);
+				ft_printf("1");
 		}
 	}
 	finalpush500(a, b, alen, blen);
-}
-
-int	checktop500(int *a, int *alen, int jt)
-{
-	int	it;
-	int	top;
-
-	it = 0;
-	top = 0;
-	while (it <= *alen / 2)
-	{
-		if (a[it] >= jt && a[it] <= jt + 44)
-		{
-			top = it;
-			return (top);
-		}
-		it++;
-	}
-	return (*alen / 2);
-}
-
-int	checkbot500(int *a, int *alen, int jt)
-{
-	int	it;
-	int	bot;
-
-	it = *alen - 1;
-	bot = 0;
-	while (it > *alen / 2)
-	{
-		if (a[it] >= jt && a[it] <= jt + 44)
-		{
-			bot = it;
-			return (bot);
-		}
-		it--;
-	}
-	return (bot);
 }
 
 void	rotb500(int *b, int *blen)
