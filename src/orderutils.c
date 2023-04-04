@@ -14,54 +14,6 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
-int	checktop(int *a, int *alen, int jt)
-{
-	int	it;
-	int	top;
-	int	mod;
-
-	it = 0;
-	top = 0;
-	if (*alen > 100 || jt > 100)
-		mod = 44;
-	else
-		mod = 19;
-	while (it <= *alen / 2)
-	{
-		if (a[it] >= jt && a[it] <= jt + mod)
-		{
-			top = it;
-			return (top);
-		}
-		it++;
-	}
-	return (*alen / 2);
-}
-
-int	checkbot(int *a, int *alen, int jt)
-{
-	int	it;
-	int	bot;
-	int	mod;
-
-	it = *alen - 1;
-	bot = 0;
-	if (*alen > 100 || jt > 100)
-		mod = 44;
-	else
-		mod = 19;
-	while (it > *alen / 2)
-	{
-		if (a[it] >= jt && a[it] <= jt + mod)
-		{
-			bot = it;
-			return (bot);
-		}
-		it--;
-	}
-	return (bot);
-}
-
 int	rotstack(int *a, int *alen, int check, int hold)
 {
 	int	small;
@@ -72,41 +24,115 @@ int	rotstack(int *a, int *alen, int check, int hold)
 		rtp(a, 0, alen, 0);
 		check = 1;
 	}
-	while (check == 0 && a[0] > a[*alen - 1] && a[0] < (a[checkbig(a, alen)]) - 4)
-		rtp(a, 0, alen, 0);
-	while (check == 1 && a[0] < hold && a[0] > a[*alen - 1] && a[0] < a[*alen - 1] + 4)
-		rtp(a, 0, alen, 0);
+	if (check == 0)
+	{
+		while (a[0] < (a[checkbig(a, alen)]) - 4 && a[0] > a[*alen - 1])
+			rtp(a, 0, alen, 0);
+	}
+	if (check == 1)
+	{
+		while (a[0] < a[*alen - 1] + 4 && a[0] < hold && a[0] > a[*alen - 1])
+			rtp(a, 0, alen, 0);
+	}
 	return (check);
 }
 
 void	pushstack(int *a, int *b, int *alen, int *blen)
 {
+	int	check;
+
+	check = pushpos(a, b, alen, blen);
 	if (b[0] < a[0] && b[0] > a[*alen - 1])
 		pa(b, a, blen, alen);
-	else if (a[checkposition2(b, a, alen, blen)] == a[0])
+	else if (check > 0)
 	{
-		rrtp(0, b, 0, blen);
+		pushbup(a, b, alen, blen);
 		pa(b, a, blen, alen);
 	}
-	else if (b[0] > a[checkbig(a, alen)] || b[0] < a[checksmall(a, alen)])
-		pushexb(a, b, alen, blen);
-	else
-		pushrandom(a, b, alen, blen);
+	else if (check < 0)
+	{
+		pushbdown(a, b, alen, blen);
+		pa(b, a, blen, alen);
+	}
 }
 
-void	pushexb(int *a, int *b, int *alen, int *blen)
+int	pushpos(int *a, int *b, int *alen, int *blen)
 {
 	int	it;
-	int	n;
+	int	jt;
+	int	check;
 
-	n = a[checksmall(a, alen)];
-	it = checksmall(a, alen);
-	while (a[0] != n)
+	it = 1;
+	jt = checkposition(b, a, alen);
+	while (it < 6)
 	{
-		if (it <= *alen / 2)
+		if (checkposdyn(b[it], a, alen) < jt)
+		{
+			check = it;
+			jt = checkposdyn(b[it], a, alen);
+		}
+		if (checkposdyn(b[*blen - it], a, alen) < jt)
+		{
+			check = -it;
+			jt = checkposdyn(b[*blen - it], a, alen);
+		}
+		it++;
+	}
+	return (check);
+}
+
+void	pushbup(int *a, int *b, int *alen, int *blen)
+{
+	int	hold;
+	int	holdb;
+
+	holdb = b[pushpos(a, b, alen, blen)];
+	hold = a[checkposdyn(holdb, a, alen)];
+	while (a[0] != hold && b[0] != holdb)
+	{
+		if (checkposdyn(holdb, a, alen) <= *alen / 2)
+			rtp(a, b, alen, blen);
+		else
+		{
+			rtp(0, b, 0, blen);
+			rrtp(a, 0, alen, 0);
+		}
+	}
+	while (a[0] != hold && b[0] == holdb)
+	{
+		if (checkposdyn(holdb, a, alen) <= *alen / 2)
 			rtp(a, 0, alen, 0);
 		else
 			rrtp(a, 0, alen, 0);
 	}
-	pa(b, a, blen, alen);
+	while (b[0] != holdb && a[0] == hold)
+		rtp(0, b, 0, blen);
+}
+
+void	pushbdown(int *a, int *b, int *alen, int *blen)
+{
+	int	hold;
+	int	holdb;
+
+	holdb = b[*blen + pushpos(a, b, alen, blen)];
+	hold = a[checkposdyn(holdb, a, alen)];
+	while (a[0] != hold && b[0] != holdb)
+	{
+		if (checkposdyn(holdb, a, alen) > *alen / 2)
+			rrtp(a, b, alen, blen);
+		else
+		{
+			rrtp(0, b, 0, blen);
+			rtp(a, 0, alen, 0);
+		}
+	}
+	while (a[0] != hold && b[0] == holdb)
+	{
+		if (checkposdyn(holdb, a, alen) <= *alen / 2)
+			rtp(a, 0, alen, 0);
+		else
+			rrtp(a, 0, alen, 0);
+	}
+	while (b[0] != holdb && a[0] == hold)
+		rrtp(0, b, 0, blen);
 }

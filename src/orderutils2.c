@@ -13,88 +13,34 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
-int	checkposition(int *a, int *b, int *blen)
+int	checkposition(int *b, int *a, int *alen)
 {
 	int	it;
 
 	it = 1;
-	while (it < *blen)
+	while (it < *alen)
 	{
-		if (a[0] < b[it] && a[0] > b[it - 1])
+		if (b[0] < a[it] && b[0] > a[it - 1])
 			return (it);
 		it++;
 	}
+	if (b[0] > a[checkbig(a, alen)] || b[0] < a[checksmall(a, alen)])
+		return (checksmall(a, alen));
 	exit (0);
 }
 
-void	pushrandom(int *a, int *b, int *alen, int *blen)
+int	checkposdyn(int b, int *a, int *alen)
 {
 	int	it;
-	int	n;
-
-	n = a[checkposition(b, a, alen)];
-	it = checkposition(b, a, alen);
-	if (it <= *alen / 2)
-	{
-		while (a[0] != n)
-			rtp(a, 0, alen, 0);
-	}
-	else
-	{
-		while (a[0] != n)
-			rrtp(a, 0, alen, 0);
-	}
-	pa(b, a, blen, alen);
-}
-
-void	rotb(int *b, int *blen)
-{
-	int	it;
-	int	n;
-
-	it = checkbig(b, blen);
-	n = b[checkbig(b, blen)];
-	if (it <= *blen / 2)
-	{
-		while (b[0] != n)
-			rtp(0, b, 0, blen);
-	}
-	else
-	{
-		while (b[0] != n)
-			rrtp(0, b, 0, blen);
-	}
-}
-
-void	finalpush(int *a, int *b, int *alen, int *blen)
-{
-	int	it;
-	int	slen;
 
 	it = 0;
-	slen = *blen;
-	while (it < slen)
+	while (it < *alen)
 	{
-		rotb(b, blen);
-		pa(b, a, blen, alen);
+		if (b < a[it] && b > a[it - 1])
+			return (it);
 		it++;
 	}
-}
-
-void	rota(int *a, int *alen, int top, int bot)
-{
-	int	hold;
-
-	if (top <= *alen - bot)
-	{
-		hold = a[top];
-		while (a[0] != hold)
-			rtp(a, 0, alen, 0);
-	}
-	else if (top > *alen - bot)
-	{
-		hold = a[bot];
-		while (a[0] != hold)
-			rrtp(a, 0, alen, 0);
-	}
+	if (b > a[checkbig(a, alen)] || b < a[checksmall(a, alen)])
+		return (checksmall(a, alen));
+	exit (0);
 }
