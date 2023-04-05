@@ -15,61 +15,50 @@
 
 void	order500(int *a, int *b, int *alen, int *blen)
 {
-	int	it;
-	int	jt;
+	int	check;
+	int	hold;
 
-	it = 0;
-	jt = *alen;
-	while (*alen > 5)
+	hold = a[*alen - 1];
+	check = 0;
+	while (a[0] != hold)
 	{
-		if (jt == *alen + 45)
-		{
-			it += 45;
-			jt = *alen;
-		}
-		else if (a[0] >= it && a[0] <= it + 44)
-			pushstack(a, b, alen, blen);
-		else if (a[0] > it + 44)
-		{
-			while (a[0] > it + 44)
-				ft_printf("1");
-		}
+		check = rotstack500(a, alen, check, hold);
+		pb(a, b, alen, blen);
 	}
-	finalpush500(a, b, alen, blen);
-}
-
-void	rotb500(int *b, int *blen)
-{
-	int	it;
-	int	n;
-
-	it = checkbig(b, blen);
-	n = b[checkbig(b, blen)];
-	if (it <= *blen / 2)
+	while (*blen > 0)
+		pushstack(a, b, alen, blen);
+	hold = a[checksmall(a, alen)];
+	if (checksmall(a, alen) <= *alen / 2)
 	{
-		while (b[0] != n)
-			rtp(0, b, 0, blen);
+		while (a[0] != hold)
+			rtp(a, 0, alen, 0);
 	}
 	else
 	{
-		while (b[0] != n)
-			rrtp(0, b, 0, blen);
+		while (a[0] != hold)
+			rrtp(a, 0, alen, 0);
 	}
 }
 
-void	finalpush500(int *a, int *b, int *alen, int *blen)
+int	rotstack500(int *a, int *alen, int check, int hold)
 {
-	int	it;
-	int	slen;
+	int	small;
 
-	it = 0;
-	slen = *blen;
-	while (*alen > 0)
-		pb(a, b, alen, blen);
-	while (it < slen)
+	small = a[checksmall(a, alen)];
+	if (a[0] == small)
 	{
-		rotb500(b, blen);
-		pa(b, a, blen, alen);
-		it++;
+		rtp(a, 0, alen, 0);
+		check = 1;
 	}
+	else if (a[0] <= 50)
+	{
+		rtp(a, 0, alen, 0);
+		check = 1;
+	}
+	else if (check == 1)
+	{
+		while (a[0] < a[*alen - 1] + 10 && a[0] < hold && a[0] > a[*alen - 1])
+			rtp(a, 0, alen, 0);
+	}
+	return (check);
 }

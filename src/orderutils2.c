@@ -33,7 +33,33 @@ int	checkposdyn(int b, int *a, int *alen)
 {
 	int	it;
 
-	it = 0;
+	it = 1;
+	while (it < *alen)
+	{
+		if (b < a[it] && b > a[it - 1])
+		{
+			if (it > *alen / 2)
+				return (*alen - it);
+			return (it);
+		}
+		it++;
+	}
+	if (b > a[checkbig(a, alen)] || b < a[checksmall(a, alen)])
+	{
+		if (checksmall(a, alen) > *alen / 2)
+			return (*alen - checksmall(a, alen));
+		return (checksmall(a, alen));
+	}
+	if (b < a[0] && b > a[*alen - 1])
+		return (0);
+	exit (0);
+}
+
+int	checkposta(int b, int *a, int *alen)
+{
+	int	it;
+
+	it = 1;
 	while (it < *alen)
 	{
 		if (b < a[it] && b > a[it - 1])
@@ -42,5 +68,7 @@ int	checkposdyn(int b, int *a, int *alen)
 	}
 	if (b > a[checkbig(a, alen)] || b < a[checksmall(a, alen)])
 		return (checksmall(a, alen));
+	if (b < a[0] && b > a[*alen - 1])
+		return (0);
 	exit (0);
 }

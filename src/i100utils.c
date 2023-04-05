@@ -111,4 +111,15 @@ void	orderit(int *a, int *b, int *alen, int *blen)
 	}
 	while (*blen > 0)
 		pushstack(a, b, alen, blen);
+	hold = a[checksmall(a, alen)];
+	if (checksmall(a, alen) <= *alen / 2)
+	{
+		while (a[0] != hold)
+			rtp(a, 0, alen, 0);
+	}
+	else
+	{
+		while (a[0] != hold)
+			rrtp(a, 0, alen, 0);
+	}
 }

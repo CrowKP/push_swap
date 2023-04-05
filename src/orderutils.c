@@ -24,7 +24,7 @@ int	rotstack(int *a, int *alen, int check, int hold)
 		rtp(a, 0, alen, 0);
 		check = 1;
 	}
-	if (check == 0)
+	if (check == 2)
 	{
 		while (a[0] < (a[checkbig(a, alen)]) - 4 && a[0] > a[*alen - 1])
 			rtp(a, 0, alen, 0);
@@ -44,12 +44,12 @@ void	pushstack(int *a, int *b, int *alen, int *blen)
 	check = pushpos(a, b, alen, blen);
 	if (b[0] < a[0] && b[0] > a[*alen - 1])
 		pa(b, a, blen, alen);
-	else if (check > 0)
+	if (check <= *alen / 2)
 	{
 		pushbup(a, b, alen, blen);
 		pa(b, a, blen, alen);
 	}
-	else if (check < 0)
+	else if (check > *alen / 2)
 	{
 		pushbdown(a, b, alen, blen);
 		pa(b, a, blen, alen);
@@ -62,19 +62,20 @@ int	pushpos(int *a, int *b, int *alen, int *blen)
 	int	jt;
 	int	check;
 
+	check = 0;
 	it = 1;
-	jt = checkposition(b, a, alen);
-	while (it < 6)
+	jt = checkposdyn(b[0], a, alen);
+	while (it < *blen)
 	{
-		if (checkposdyn(b[it], a, alen) < jt)
+		if (checkposdyn(b[it], a, alen) + it < jt)
 		{
 			check = it;
-			jt = checkposdyn(b[it], a, alen);
+			jt = checkposdyn(b[it], a, alen) + it;
 		}
-		if (checkposdyn(b[*blen - it], a, alen) < jt)
+		if (checkposdyn(b[*blen - it], a, alen) + (*blen - it) < jt)
 		{
-			check = -it;
-			jt = checkposdyn(b[*blen - it], a, alen);
+			check = *blen - it;
+			jt = checkposdyn(b[*blen - it], a, alen) + (*blen - it);
 		}
 		it++;
 	}
@@ -87,10 +88,10 @@ void	pushbup(int *a, int *b, int *alen, int *blen)
 	int	holdb;
 
 	holdb = b[pushpos(a, b, alen, blen)];
-	hold = a[checkposdyn(holdb, a, alen)];
+	hold = a[checkposta(holdb, a, alen)];
 	while (a[0] != hold && b[0] != holdb)
 	{
-		if (checkposdyn(holdb, a, alen) <= *alen / 2)
+		if (checkposta(holdb, a, alen) <= *alen / 2)
 			rtp(a, b, alen, blen);
 		else
 		{
@@ -100,7 +101,7 @@ void	pushbup(int *a, int *b, int *alen, int *blen)
 	}
 	while (a[0] != hold && b[0] == holdb)
 	{
-		if (checkposdyn(holdb, a, alen) <= *alen / 2)
+		if (checkposta(holdb, a, alen) <= *alen / 2)
 			rtp(a, 0, alen, 0);
 		else
 			rrtp(a, 0, alen, 0);
@@ -114,11 +115,11 @@ void	pushbdown(int *a, int *b, int *alen, int *blen)
 	int	hold;
 	int	holdb;
 
-	holdb = b[*blen + pushpos(a, b, alen, blen)];
-	hold = a[checkposdyn(holdb, a, alen)];
+	holdb = b[pushpos(a, b, alen, blen)];
+	hold = a[checkposta(holdb, a, alen)];
 	while (a[0] != hold && b[0] != holdb)
 	{
-		if (checkposdyn(holdb, a, alen) > *alen / 2)
+		if (checkposta(holdb, a, alen) > *alen / 2)
 			rrtp(a, b, alen, blen);
 		else
 		{
@@ -128,7 +129,7 @@ void	pushbdown(int *a, int *b, int *alen, int *blen)
 	}
 	while (a[0] != hold && b[0] == holdb)
 	{
-		if (checkposdyn(holdb, a, alen) <= *alen / 2)
+		if (checkposta(holdb, a, alen) <= *alen / 2)
 			rtp(a, 0, alen, 0);
 		else
 			rrtp(a, 0, alen, 0);
