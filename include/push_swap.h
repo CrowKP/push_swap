@@ -68,6 +68,7 @@ void	pushbup(int *a, int *b, int *alen, int *blen);
 void	pushbdown(int *a, int *b, int *alen, int *blen);
 int		checkposdyn(int b, int *a, int *alen);
 int		checkposta(int b, int *a, int *alen);
-int		rotstack500(int *a, int *alen, int check, int hold);
+int		posmodup(int *a, int b, int *alen, int it);
+int		posmodown(int *a, int b, int *alen, int it);
 
 #endif

@@ -72,3 +72,29 @@ int	checkposta(int b, int *a, int *alen)
 		return (0);
 	exit (0);
 }
+
+int	posmodup(int *a, int b, int *alen, int it)
+{
+	if (checkposta(b, a, alen) <= *alen / 2)
+	{
+		if (checkposdyn(b, a, alen) > it)
+			return (checkposdyn(b, a, alen));
+		else
+			return (it);
+	}
+	else
+		return (checkposdyn(b, a, alen) + it);
+}
+
+int	posmodown(int *a, int b, int *alen, int it)
+{
+	if (checkposta(b, a, alen) > *alen / 2)
+	{
+		if (checkposdyn(b, a, alen) > it)
+			return (checkposdyn(b, a, alen));
+		else
+			return (it);
+	}
+	else
+		return (checkposdyn(b, a, alen) + it);
+}

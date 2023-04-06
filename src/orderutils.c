@@ -61,21 +61,24 @@ int	pushpos(int *a, int *b, int *alen, int *blen)
 	int	it;
 	int	jt;
 	int	check;
+	int	temp;
 
 	check = 0;
 	it = 1;
 	jt = checkposdyn(b[0], a, alen);
 	while (it < *blen)
 	{
-		if (checkposdyn(b[it], a, alen) + it < jt)
+		temp = posmodup(a, b[it], alen, it);
+		if (temp < jt)
 		{
 			check = it;
-			jt = checkposdyn(b[it], a, alen) + it;
+			jt = temp;
 		}
-		if (checkposdyn(b[*blen - it], a, alen) + (*blen - it) < jt)
+		temp = posmodown(a, b[*blen - it], alen, (*blen - it));
+		if (temp < jt)
 		{
 			check = *blen - it;
-			jt = checkposdyn(b[*blen - it], a, alen) + (*blen - it);
+			jt = temp;
 		}
 		it++;
 	}
