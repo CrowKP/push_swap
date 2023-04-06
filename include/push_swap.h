@@ -70,5 +70,7 @@ int		checkposdyn(int b, int *a, int *alen);
 int		checkposta(int b, int *a, int *alen);
 int		posmodup(int *a, int b, int *alen, int it);
 int		posmodown(int *a, int b, int *alen, int it);
+int		rotstack500(int *a, int *alen, int check, int hold);
+void	rota(int *a, int *b, int *alen, int *blen);
 
 #endif

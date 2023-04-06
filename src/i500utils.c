@@ -18,13 +18,11 @@ void	order500(int *a, int *b, int *alen, int *blen)
 	int	check;
 	int	hold;
 
-	if (a[0] < a[*alen - 1] && *blen == 0)
-		rtp(a, 0, alen, 0);
 	hold = a[*alen - 1];
 	check = 0;
 	while (a[0] != hold)
 	{
-		check = rotstack(a, alen, check, hold);
+		check = rotstack500(a, alen, check, hold);
 		pb(a, b, alen, blen);
 	}
 	while (*blen > 0)
@@ -38,6 +36,47 @@ void	order500(int *a, int *b, int *alen, int *blen)
 	else
 	{
 		while (a[0] != hold)
+			rrtp(a, 0, alen, 0);
+	}
+}
+
+int	rotstack500(int *a, int *alen, int check, int hold)
+{
+	int	small;
+
+	small = a[checksmall(a, alen)];
+	if (a[0] == small)
+	{
+		rtp(a, 0, alen, 0);
+		check = 1;
+	}
+	else if (check == 0 && a[0] <= (a[*alen - 1] - 50))
+	{
+		rtp(a, 0, alen, 0);
+		check = 1;
+	}
+	else if (check == 1)
+	{
+		while (a[0] < a[*alen - 1] + 10 && a[0] < hold && a[0] > a[*alen - 1])
+			rtp(a, 0, alen, 0);
+	}
+	return (check);
+}
+
+void	rota(int *a, int *b, int *alen, int *blen)
+{
+	int	hold;
+	int	holdb;
+	int	it;
+
+	holdb = b[pushpos(a, b, alen, blen)];
+	it = checkposta(holdb, a, alen);
+	hold = a[checkposta(holdb, a, alen)];
+	while (a[0] != hold && b[0] == holdb)
+	{
+		if (it <= *alen / 2)
+			rtp(a, 0, alen, 0);
+		else
 			rrtp(a, 0, alen, 0);
 	}
 }

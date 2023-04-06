@@ -24,9 +24,9 @@ int	rotstack(int *a, int *alen, int check, int hold)
 		rtp(a, 0, alen, 0);
 		check = 1;
 	}
-	if (check == 2)
+	if (check == 0)
 	{
-		while (a[0] < (a[checkbig(a, alen)]) - 4 && a[0] > a[*alen - 1])
+		while (a[0] < (a[checkbig(a, alen)]) - 5 && a[0] > a[*alen - 1])
 			rtp(a, 0, alen, 0);
 	}
 	if (check == 1)
@@ -89,12 +89,14 @@ void	pushbup(int *a, int *b, int *alen, int *blen)
 {
 	int	hold;
 	int	holdb;
+	int	it;
 
 	holdb = b[pushpos(a, b, alen, blen)];
+	it = checkposta(holdb, a, alen);
 	hold = a[checkposta(holdb, a, alen)];
 	while (a[0] != hold && b[0] != holdb)
 	{
-		if (checkposta(holdb, a, alen) <= *alen / 2)
+		if (it <= *alen / 2)
 			rtp(a, b, alen, blen);
 		else
 		{
@@ -102,13 +104,7 @@ void	pushbup(int *a, int *b, int *alen, int *blen)
 			rrtp(a, 0, alen, 0);
 		}
 	}
-	while (a[0] != hold && b[0] == holdb)
-	{
-		if (checkposta(holdb, a, alen) <= *alen / 2)
-			rtp(a, 0, alen, 0);
-		else
-			rrtp(a, 0, alen, 0);
-	}
+	rota(a, b, alen, blen);
 	while (b[0] != holdb && a[0] == hold)
 		rtp(0, b, 0, blen);
 }
@@ -117,12 +113,14 @@ void	pushbdown(int *a, int *b, int *alen, int *blen)
 {
 	int	hold;
 	int	holdb;
+	int	it;
 
 	holdb = b[pushpos(a, b, alen, blen)];
+	it = checkposta(holdb, a, alen);
 	hold = a[checkposta(holdb, a, alen)];
 	while (a[0] != hold && b[0] != holdb)
 	{
-		if (checkposta(holdb, a, alen) > *alen / 2)
+		if (it > *alen / 2)
 			rrtp(a, b, alen, blen);
 		else
 		{
@@ -130,13 +128,7 @@ void	pushbdown(int *a, int *b, int *alen, int *blen)
 			rtp(a, 0, alen, 0);
 		}
 	}
-	while (a[0] != hold && b[0] == holdb)
-	{
-		if (checkposta(holdb, a, alen) <= *alen / 2)
-			rtp(a, 0, alen, 0);
-		else
-			rrtp(a, 0, alen, 0);
-	}
+	rota(a, b, alen, blen);
 	while (b[0] != holdb && a[0] == hold)
 		rrtp(0, b, 0, blen);
 }
