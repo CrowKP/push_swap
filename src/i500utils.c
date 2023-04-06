@@ -62,7 +62,7 @@ int	rotstack500(int *a, int *alen, int check, int hold)
 		return (check);
 	if (a[0] < hold && check == 1)
 		rtp(a, 0, alen, 0);
-	else if (check == 2)
+	else if (check == 2 && a[0] < (a[*alen - 1] + 5))
 		rtp(a, 0, alen, 0);
 	return (check);
 }
