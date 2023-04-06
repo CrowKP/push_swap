@@ -43,6 +43,7 @@ void	order500(int *a, int *b, int *alen, int *blen)
 int	rotstack500(int *a, int *alen, int check, int hold)
 {
 	int	small;
+	int	it;
 
 	small = a[checksmall(a, alen)];
 	if (a[0] == small)
@@ -50,16 +51,19 @@ int	rotstack500(int *a, int *alen, int check, int hold)
 		rtp(a, 0, alen, 0);
 		check = 1;
 	}
-	else if (check == 0 && a[0] <= (a[*alen - 1] - 50))
+	else if (check == 0 && a[0] <= 25)
 	{
+		hold = a[0];
 		rtp(a, 0, alen, 0);
-		check = 1;
+		check = 2;
 	}
-	else if (check == 1)
-	{
-		while (a[0] < a[*alen - 1] + 10 && a[0] < hold && a[0] > a[*alen - 1])
-			rtp(a, 0, alen, 0);
-	}
+	it = a[scan500(a, alen)];
+	while (a[0] != it)
+		return (check);
+	if (a[0] < hold && check == 1)
+		rtp(a, 0, alen, 0);
+	else if (check == 2)
+		rtp(a, 0, alen, 0);
 	return (check);
 }
 
@@ -79,4 +83,49 @@ void	rota(int *a, int *b, int *alen, int *blen)
 		else
 			rrtp(a, 0, alen, 0);
 	}
+}
+
+int	scan500(int *a, int *alen)
+{
+	int	it;
+	int	jt;
+	int	check;
+	int	count;
+
+	it = 0;
+	while (it < *alen)
+	{
+		check = it;
+		if (a[it] < a[*alen - 1])
+			it++;
+		else if (a[it] - a[*alen - 1] < jt || !jt)
+		{
+			if (countsmall(a, alen, it) > count || !count)
+			{
+				jt = (a[it] - a[*alen - 1]);
+				check = it;
+				count = countsmall(a, alen, it);
+			}
+			it++;
+		}
+		else if (a[it] - a[*alen - 1] >= jt)
+			it++;
+	}
+	return (check);
+}
+
+int	countsmall(int *a, int *alen, int it)
+{
+	int	count;
+	int	ref;
+
+	count = 0;
+	ref = a[it];
+	while (it < *alen)
+	{
+		if (a[it] < ref)
+			count++;
+		it++;
+	}
+	return (count);
 }
