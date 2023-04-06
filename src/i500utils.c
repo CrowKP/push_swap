@@ -56,9 +56,9 @@ int	rotstack500(int *a, int *alen, int check, int hold)
 		hold = a[0];
 		rtp(a, 0, alen, 0);
 		check = 2;
+		it = a[scan500(a, alen)];
 	}
-	it = a[scan500(a, alen)];
-	while (a[0] != it)
+	while (a[0] != it && check == 2)
 		return (check);
 	if (a[0] < hold && check == 1)
 		rtp(a, 0, alen, 0);
@@ -123,8 +123,11 @@ int	countsmall(int *a, int *alen, int it)
 	ref = a[it];
 	while (it < *alen)
 	{
-		if (a[it] < ref)
+		if (a[it] < ref + 5 && a[it] > ref)
+		{
+			ref = a[it];
 			count++;
+		}
 		it++;
 	}
 	return (count);
