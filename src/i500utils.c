@@ -25,6 +25,7 @@ void	order500(int *a, int *b, int *alen, int *blen)
 		check = rotstack500(a, alen, check, hold);
 		pb(a, b, alen, blen);
 	}
+	pb(a, b, alen, blen);
 	while (*blen > 0)
 		pushstack(a, b, alen, blen);
 	hold = a[checksmall(a, alen)];
@@ -45,24 +46,24 @@ int	rotstack500(int *a, int *alen, int check, int hold)
 	int	small;
 	int	it;
 
+	it = a[scan500(a, alen)];
 	small = a[checksmall(a, alen)];
 	if (a[0] == small)
 	{
 		rtp(a, 0, alen, 0);
 		check = 1;
 	}
-	else if (check == 0 && a[0] <= 25)
+	if (a[0] == it && check == 0)
 	{
 		hold = a[0];
 		rtp(a, 0, alen, 0);
 		check = 2;
-		it = a[scan500(a, alen)];
 	}
 	while (a[0] != it && check == 2)
 		return (check);
-	if (a[0] < hold && check == 1)
+	if (a[0] < (a[*alen - 1] + 40) && a[0] > a[*alen - 1] && check == 0)
 		rtp(a, 0, alen, 0);
-	else if (check == 2 && a[0] < (a[*alen - 1] + 5))
+	else if (check == 1 && a[0] > a[*alen - 1] && a[0] < hold)
 		rtp(a, 0, alen, 0);
 	return (check);
 }
